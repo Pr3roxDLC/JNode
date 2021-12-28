@@ -4,9 +4,14 @@ import me.pr3.JNode.IO.NodeExporter;
 import me.pr3.JNode.Nodes.*;
 import me.pr3.JNode.Var.Var;
 
+import java.io.File;
+import java.util.logging.FileHandler;
+
 public class Main {
 
     public static void main(String[] args) {
+
+        new File("Test.jn");
 
         simpleCounter();
         fibonaci(12);
@@ -45,7 +50,7 @@ public class Main {
 
         fibonacci.run();
 
-        NodeExporter.exportNode(fibonacci, null, "");
+        NodeExporter.exportNode(fibonacci, "Fibonacci");
 
     }
 

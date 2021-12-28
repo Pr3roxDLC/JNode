@@ -5,6 +5,23 @@ import me.pr3.JNode.Var.Var;
 public class ComparatorNode extends Node {
 
     Operation operation;
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Var getOut() {
+        return out;
+    }
+
+    public Var getIn1() {
+        return in1;
+    }
+
+    public Var getIn2() {
+        return in2;
+    }
+
     Var out, in1, in2;
 
     public enum Operation {

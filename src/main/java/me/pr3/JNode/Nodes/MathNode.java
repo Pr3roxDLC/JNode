@@ -5,7 +5,26 @@ import me.pr3.JNode.Var.Var;
 public class MathNode extends Node {
 
     Operation operation;
-    Var out, in1, in2;
+    Var out;
+    Var in1;
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Var getOut() {
+        return out;
+    }
+
+    public Var getIn1() {
+        return in1;
+    }
+
+    public Var getIn2() {
+        return in2;
+    }
+
+    Var in2;
 
     public enum Operation {
         ADDITION,

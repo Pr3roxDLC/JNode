@@ -4,6 +4,10 @@ import me.pr3.JNode.Var.Var;
 
 public class IfNode extends BodyNode{
 
+    public ComparatorNode getComparatorNode() {
+        return comparatorNode;
+    }
+
     ComparatorNode comparatorNode = null;
 
     public IfNode(ComparatorNode comparatorNode, Node... bodyNodes){

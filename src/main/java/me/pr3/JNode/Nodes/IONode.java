@@ -4,6 +4,10 @@ import me.pr3.JNode.Var.Var;
 
 public class IONode extends Node{
 
+    public Var getVar() {
+        return var;
+    }
+
     Var var = null;
 
     public enum Operation{

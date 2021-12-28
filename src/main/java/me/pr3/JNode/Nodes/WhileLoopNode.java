@@ -4,6 +4,10 @@ import me.pr3.JNode.Var.Var;
 
 public class WhileLoopNode extends BodyNode{
 
+    public Var getVar() {
+        return var;
+    }
+
     Var var = null;
 
 
