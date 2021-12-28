@@ -28,7 +28,6 @@ public class MathNode extends Node {
 
         switch (operation) {
             case ADDITION:
-                System.out.println("Adding " + in1.getValue() + " and " + in2.getValue() + " and storing to out");
                 out.setValue(in1.getValue() + in2.getValue());
                 break;
             case SUBTRACTION:
