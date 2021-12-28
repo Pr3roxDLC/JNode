@@ -5,7 +5,7 @@ public class TopNode extends BodyNode{
 
 
     public TopNode(Node... nodes){
-        this.nodes = nodes;
+        super(nodes);
     }
 
     @Override

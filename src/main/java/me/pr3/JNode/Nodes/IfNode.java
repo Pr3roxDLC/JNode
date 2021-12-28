@@ -11,8 +11,8 @@ public class IfNode extends BodyNode{
     ComparatorNode comparatorNode = null;
 
     public IfNode(ComparatorNode comparatorNode, Node... bodyNodes){
+        super(bodyNodes);
         this.comparatorNode = comparatorNode;
-        this.nodes = bodyNodes;
     }
 
     @Override

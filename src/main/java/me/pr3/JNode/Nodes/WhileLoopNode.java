@@ -12,8 +12,8 @@ public class WhileLoopNode extends BodyNode{
 
 
     public WhileLoopNode(Var var, Node ... bodyNodes){
+        super(bodyNodes);
         this.var = var;
-        this.nodes = bodyNodes;
     }
 
     @Override

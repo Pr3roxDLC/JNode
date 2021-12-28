@@ -1,6 +1,7 @@
 package me.pr3.JNode;
 
 import me.pr3.JNode.IO.NodeExporter;
+import me.pr3.JNode.IO.NodeImporter;
 import me.pr3.JNode.Nodes.*;
 import me.pr3.JNode.Var.Var;
 
@@ -11,9 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new File("Test.jn");
 
-        simpleCounter();
+        //simpleCounter();
         fibonaci(12);
 
     }
@@ -48,9 +48,11 @@ public class Main {
                 )
         );
 
-        fibonacci.run();
+        //fibonacci.run();
+
 
         NodeExporter.exportNode(fibonacci, "Fibonacci");
+        NodeImporter.importFromFile("Fibonacci");
 
     }
 
