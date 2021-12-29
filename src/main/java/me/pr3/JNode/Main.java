@@ -59,7 +59,9 @@ public class Main {
         fibonacci.run();
 
 
-        NodeImporter.importFromFile("Fibonacci").run();
+        Node imported = NodeImporter.importFromFile("Fibonacci");
+
+        NodeExporter.exportNode(imported, "Fibonacci2");
 
     }
 

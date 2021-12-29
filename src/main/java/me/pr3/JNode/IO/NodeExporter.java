@@ -15,6 +15,7 @@ public class NodeExporter {
     public static String out = "";
 
     public static void exportNode(Node parentNode, String fileName) {
+        out = "";
         //Always start at level 0
         exportNode(parentNode, fileName, 0);
         System.out.println(out);

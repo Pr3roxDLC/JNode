@@ -18,6 +18,7 @@ public class NodeImporter {
     public static ArrayList<String> lines = new ArrayList<>();
 
     public static Node importFromFile(String fileName) {
+        lines.clear();
         String string = getStringFromFile(fileName);
         //remove whitespace
         string = string.replace(" ", "");
@@ -76,6 +77,7 @@ public class NodeImporter {
                 if(!nodeStack.empty()) {
                     nodeStack.peek().children.add(parent.node);
                 }else{
+                    ((TopNode)parent.node).getVarPool().getVars().putAll(pool.getVars());
                     return parent.node;
                 }
                 //Whenever we Reach a ReturnNode we know that the BodyNode previously worked on must be finished, therefor we can pop it from the stack, asseble the Node and then add it to its parent Node
@@ -110,9 +112,6 @@ public class NodeImporter {
         return Arrays.stream(array).map(n -> n.replace("}", "")).toArray(String[]::new);
     }
 
-    public static ArrayList<String> getLinesTillNextReturnNode(int i) {
-        return null;
-    }
 
     public static Class getClassFromLine(String line) {
         if (line.startsWith(ComparatorNode.class.getSimpleName())) return ComparatorNode.class;
