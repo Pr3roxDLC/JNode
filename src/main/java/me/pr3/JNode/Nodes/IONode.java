@@ -10,6 +10,12 @@ public class IONode extends Node{
 
     Var var = null;
 
+    public Operation getOperation() {
+        return operation;
+    }
+
+    Operation operation = null;
+
     public enum Operation{
         IN,
         OUT
@@ -17,6 +23,7 @@ public class IONode extends Node{
 
     public IONode(Operation op, Var var){
         this.var = var;
+        this.operation = op;
     }
 
     @Override

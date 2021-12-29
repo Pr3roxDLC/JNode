@@ -1,12 +1,14 @@
 package me.pr3.JNode.IO;
 
 import me.pr3.JNode.Nodes.*;
+import me.pr3.JNode.Var.Var;
 import sun.nio.ch.IOUtil;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class NodeExporter {
 
@@ -48,12 +50,12 @@ public class NodeExporter {
         if (node instanceof IfNode) {
             IfNode ifNode = (IfNode) node;
             ComparatorNode comparatorNode = ifNode.getComparatorNode();
-            outputString += "{ " + comparatorNode.getOut().getName() + " , " + comparatorNode.getIn1().getName() + " , " + comparatorNode.getIn2().getName() + " , " + comparatorNode.getOperation().toString() + " }";
+            outputString += "{ " + comparatorNode.getOut().getName() + " , " + comparatorNode.getIn1().getName() + " , " + comparatorNode.getIn2().getName() + " , OP[" + comparatorNode.getOperation().toString() + "] }";
             return outputString;
         }
         if (node instanceof MathNode) {
             MathNode mathNode = (MathNode) node;
-            outputString += "{ " + mathNode.getOut().getName() + " , " + mathNode.getIn1().getName() + " , " + mathNode.getIn2().getName() + " , " + mathNode.getOperation().toString() + " }";
+            outputString += "{ " + mathNode.getOut().getName() + " , " + mathNode.getIn1().getName() + " , " + mathNode.getIn2().getName() + " , OP[" + mathNode.getOperation().toString() + "] }";
             return outputString;
         }
         if (node instanceof WhileLoopNode) {
@@ -63,8 +65,18 @@ public class NodeExporter {
         }
         if (node instanceof IONode) {
             IONode ioNode = (IONode) node;
-            outputString += "{ " + ioNode.getVar().getName() + " }";
+            outputString += "{ " + ioNode.getVar().getName() + " ,  OP[" + ioNode.getOperation().toString() +  "] }";
             return outputString;
+        }
+        if(node instanceof TopNode){
+            TopNode topNode = (TopNode) node;
+            outputString += "{ ";
+            if(topNode.getVarPool().getVars().isEmpty())return outputString +"}";
+            for(Map.Entry<String, Var> entry : topNode.getVarPool().getVars().entrySet()){
+                outputString+= "[" + entry.getKey() + "," + entry.getValue().getValue()+"] , ";
+            }
+
+            return  outputString.substring(0, outputString.length() - 3) + " }";
         }
         return node.getClass().getSimpleName();
 

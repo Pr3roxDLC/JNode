@@ -1,11 +1,18 @@
 package me.pr3.JNode.Nodes;
 
+import me.pr3.JNode.Var.GlobalPool;
+
 public class TopNode extends BodyNode{
 
+    public GlobalPool getVarPool() {
+        return varPool;
+    }
 
+    private GlobalPool varPool = null;
 
-    public TopNode(Node... nodes){
+    public TopNode(GlobalPool varPool, Node... nodes){
         super(nodes);
+        this.varPool = varPool;
     }
 
     @Override
