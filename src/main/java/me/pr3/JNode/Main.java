@@ -26,12 +26,12 @@ public class Main {
         Var y = new Var(1, "y");
         Var i = new Var(1, "i");
         Var z = new Var(0, "z");
-        Var boolVar = new Var(1);
+        Var boolVar = new Var(1, "boolVar");
         Var zero = new Var(0, "zero");
         Var dump = new Var(0, "dump");
         Var one = new Var(1, "one");
 
-        GlobalPool globalPool = new GlobalPool(counter, x, y, i, z, zero, dump, one);
+        GlobalPool globalPool = new GlobalPool(counter, x, y, i, z, zero, dump, one, boolVar);
 
         TopNode fibonacci = new TopNode(globalPool,
                 new IfNode(
@@ -59,7 +59,7 @@ public class Main {
         fibonacci.run();
 
 
-        NodeImporter.importFromFile("Fibonacci");
+        NodeImporter.importFromFile("Fibonacci").run();
 
     }
 

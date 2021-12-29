@@ -73,8 +73,11 @@ public class NodeImporter {
 
                 nodeStack.peek().assemble();
                 NodeConstructor parent = nodeStack.pop();
-
-                nodeStack.peek().children.add(parent.node);
+                if(!nodeStack.empty()) {
+                    nodeStack.peek().children.add(parent.node);
+                }else{
+                    return parent.node;
+                }
                 //Whenever we Reach a ReturnNode we know that the BodyNode previously worked on must be finished, therefor we can pop it from the stack, asseble the Node and then add it to its parent Node
                 level--;
 
@@ -103,7 +106,8 @@ public class NodeImporter {
 
     public static String[] getVarsFromLine(String line){
         if(!line.contains("{"))return new String[]{};
-        return Arrays.stream(line.split("\\{")[1].split(",")).filter(n -> !n.startsWith("OP[")).toArray(String[]::new);
+        String[] array = Arrays.stream(line.split("\\{")[1].split(",")).filter(n -> !n.startsWith("OP[")).toArray(String[]::new);
+        return Arrays.stream(array).map(n -> n.replace("}", "")).toArray(String[]::new);
     }
 
     public static ArrayList<String> getLinesTillNextReturnNode(int i) {
