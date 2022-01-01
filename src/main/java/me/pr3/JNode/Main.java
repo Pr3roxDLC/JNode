@@ -1,84 +1,24 @@
 package me.pr3.JNode;
 
-import me.pr3.JNode.IO.NodeExporter;
-import me.pr3.JNode.IO.NodeImporter;
-import me.pr3.JNode.Nodes.*;
-import me.pr3.JNode.Var.GlobalPool;
-import me.pr3.JNode.Var.Var;
-
-import java.io.File;
-import java.util.logging.FileHandler;
+import me.pr3.JNode.Instructions.*;
+import me.pr3.JNode.Interpreter.Program;
+import me.pr3.JNode.Variable.Var;
 
 public class Main {
 
+    //Compared to 1.0, 1.1 will run on an assembly like instruction set that will be executed one by one, instead of having nodes with child nodes etc,
+    //jumps will be used to skip/repeat certain parts of the code, as a result of this, each instruction in a program will have to be assigned a certain, unique
+    //address. On top of this, a stack holding all the current return addresses will be needed for the implementation of subroutines as we need to store the
+    //return address to where we need to jump back after the subroutine is done
     public static void main(String[] args) {
-
-
-        //simpleCounter();
-        fibonaci(12);
-
+        Var var = new Var(7, "Test1");
+        Program program = new Program();
+        program.setInstructions(new Instruction[]{
+                new Calculate(program, var, var , new Var(1), Calculate.Operation.ADD),
+                new IO(program, var),
+                new CompareJumpIfNotEqual(program, var, new Var(10), 0),
+                new Exit(program)
+        });
+        program.runProgram();
     }
-
-    public static void fibonaci(int n) {
-
-        Var counter = new Var(n);
-        Var x = new Var(0, "x");
-        Var y = new Var(1, "y");
-        Var i = new Var(1, "i");
-        Var z = new Var(0, "z");
-        Var boolVar = new Var(1, "boolVar");
-        Var zero = new Var(0, "zero");
-        Var dump = new Var(0, "dump");
-        Var one = new Var(1, "one");
-
-        GlobalPool globalPool = new GlobalPool(counter, x, y, i, z, zero, dump, one, boolVar);
-
-        TopNode fibonacci = new TopNode(globalPool,
-                new IfNode(
-                        new ComparatorNode(dump, counter, zero, ComparatorNode.Operation.EQUAL),
-                        new IONode(IONode.Operation.OUT, zero),
-                        new ReturnNode()
-                ),
-                new IfNode(
-                        new ComparatorNode(dump, counter, zero, ComparatorNode.Operation.GREATER),
-                        new MathNode(counter, counter, one, MathNode.Operation.SUBTRACTION),
-                        new WhileLoopNode(boolVar,
-                                new IfNode(new ComparatorNode(boolVar, i, counter, ComparatorNode.Operation.SMALLER),
-                                        new MathNode(z, x, y, MathNode.Operation.ADDITION),
-                                        new MathNode(x, y, zero, MathNode.Operation.ADDITION),
-                                        new MathNode(y, z, zero, MathNode.Operation.ADDITION),
-                                        new MathNode(i, i, one, MathNode.Operation.ADDITION),
-                                        new IONode(IONode.Operation.OUT, y)
-                                )
-                        )
-                )
-        );
-
-        NodeExporter.exportNode(fibonacci, "Fibonacci");
-
-        fibonacci.run();
-
-
-        Node imported = NodeImporter.importFromFile("Fibonacci");
-
-        NodeExporter.exportNode(imported, "Fibonacci2");
-
-    }
-
-    public static void simpleCounter() {
-        System.out.println("test");
-        Var var = new Var(10);
-        Var var2 = new Var(0);
-        Var boolVar = new Var(1);
-
-
-        new TopNode(new GlobalPool(),new WhileLoopNode(boolVar,
-                new IfNode(new ComparatorNode(boolVar, var, var2, ComparatorNode.Operation.UNQEUAL),
-                        new MathNode(var2, var2, new Var(1), MathNode.Operation.ADDITION),
-                        new IONode(IONode.Operation.IN, var2))
-        )).run();
-
-    }
-
-
 }
