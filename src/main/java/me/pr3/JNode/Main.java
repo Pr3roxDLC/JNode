@@ -1,5 +1,6 @@
 package me.pr3.JNode;
 
+import me.pr3.JNode.IO.Exporter;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
@@ -17,15 +18,21 @@ public class Main {
                 new IO(program, var),
                 new CallSubroutine(program, 3),
                 new Exit(program),
+
                 new Calculate(program, var, var, new Var(1), Calculate.Operation.ADD),
                 new IO(program, var),
                 new CallSubroutine(program, 8),
                 new IO(program, new Var(0)),
                 new ReturnSubroutine(program),
+
                 new IO(program, new Var(100)),
                 new ReturnSubroutine(program)
 
         });
+
+
+        Exporter.exportProgram(program);
+
         program.runProgram();
     }
 }

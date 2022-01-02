@@ -6,7 +6,7 @@ import me.pr3.JNode.Variable.Var;
 
 public class IO extends Instruction{
 
-    Var output = null;
+    public Var output = null;
 
     public IO(Program parent, Var output){
         super(parent);

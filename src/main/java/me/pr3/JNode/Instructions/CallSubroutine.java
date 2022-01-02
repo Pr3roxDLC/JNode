@@ -4,7 +4,7 @@ import me.pr3.JNode.Interpreter.Program;
 
 public class CallSubroutine extends  Instruction{
 
-    int subroutineAddress = -1;
+    public int subroutineAddress = -1;
 
     public CallSubroutine(Program parent, int subroutineAddress) {
         super(parent);

@@ -3,10 +3,10 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
-public class Calculate extends Instruction{
+public class Calculate extends Instruction {
 
-    Var out, in1, in2 = null;
-    Operation operation = Operation.ADD;
+    public Var out, in1, in2 = null;
+    public Operation operation = Operation.ADD;
 
     public Calculate(Program parent, Var out, Var in1, Var in2, Operation operation) {
         super(parent);
@@ -18,7 +18,7 @@ public class Calculate extends Instruction{
 
     @Override
     public void run() {
-        switch (operation){
+        switch (operation) {
             case ADD:
                 out.setNumber(in1.getNumber().doubleValue() + in2.getNumber().doubleValue());
                 break;
@@ -39,7 +39,7 @@ public class Calculate extends Instruction{
         }
     }
 
-    public enum Operation{
+    public enum Operation {
         ADD,
         SUBTRACT,
         MULTIPLY,
