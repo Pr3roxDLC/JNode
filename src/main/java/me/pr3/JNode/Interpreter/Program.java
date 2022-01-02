@@ -2,10 +2,13 @@ package me.pr3.JNode.Interpreter;
 
 import me.pr3.JNode.Instructions.Instruction;
 
+import java.util.Stack;
+
 public class Program {
 
     private boolean stop = false;
     private int counter = 0;
+    private Stack<Integer> returnStack = new Stack<>();
 
     public void setCounter(int counter){
         this.counter = counter;
@@ -15,6 +18,9 @@ public class Program {
         return counter;
     }
 
+    public Stack<Integer> getReturnStack(){
+        return returnStack;
+    }
 
     public Program(){
 
