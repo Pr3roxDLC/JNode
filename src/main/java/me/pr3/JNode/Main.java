@@ -19,7 +19,12 @@ public class Main {
                 new Exit(program),
                 new Calculate(program, var, var, new Var(1), Calculate.Operation.ADD),
                 new IO(program, var),
+                new CallSubroutine(program, 8),
+                new IO(program, new Var(0)),
+                new ReturnSubroutine(program),
+                new IO(program, new Var(100)),
                 new ReturnSubroutine(program)
+
         });
         program.runProgram();
     }
