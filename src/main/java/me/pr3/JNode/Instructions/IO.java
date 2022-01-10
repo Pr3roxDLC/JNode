@@ -1,6 +1,5 @@
 package me.pr3.JNode.Instructions;
 
-import com.sun.org.apache.xpath.internal.operations.Variable;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
