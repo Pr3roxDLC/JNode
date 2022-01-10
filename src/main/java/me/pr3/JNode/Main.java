@@ -7,7 +7,7 @@ import me.pr3.JNode.Variable.Var;
 
 public class Main {
 
-    //Compared to 1.0, 1.1 will run on an assembly like instruction set that will be executed one by one, instead of having nodes with child nodes etc,
+    //Compared to legacy, this new version will run on an assembly like instruction set that will be executed one by one, instead of having nodes with child nodes etc,
     //jumps will be used to skip/repeat certain parts of the code, as a result of this, each instruction in a program will have to be assigned a certain, unique
     //address. On top of this, a stack holding all the current return addresses will be needed for the implementation of subroutines as we need to store the
     //return address to where we need to jump back after the subroutine is done
