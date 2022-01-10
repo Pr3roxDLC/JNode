@@ -30,7 +30,7 @@ public class Main {
         });
 
 
-        Exporter.exportProgram(program);
+        Exporter.exportProgram(program, "test");
 
         program.runProgram();
     }

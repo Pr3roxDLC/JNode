@@ -4,11 +4,14 @@ import com.sun.istack.internal.NotNull;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Locale;
 
 public class Exporter {
 
-    public static void exportProgram(Program program) {
+    public static void exportProgram(Program program, String name) {
         boolean containsExitInstruction = false;
         StringBuilder output = new StringBuilder();
         for (Instruction instruction : program.instructions) {
@@ -58,7 +61,20 @@ public class Exporter {
         if (!containsExitInstruction) {
             System.out.println("Exported Program with no Exit instruction");
         }
-        System.out.println(output);
+        createFile(output.toString(), name);
+    }
+
+
+    public static void createFile(String text, String name) {
+        try {
+            FileWriter myWriter = new FileWriter(name + ".jn");
+            myWriter.write(text);
+            myWriter.close();
+            System.out.println("Successfully exported " + name + ".jn");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
 }
