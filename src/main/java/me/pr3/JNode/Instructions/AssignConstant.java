@@ -18,6 +18,9 @@ public class AssignConstant extends Instruction {
 
     @Override
     public void run() {
-            var.setNumber(constant);
+        if(!parent.getVarPool().containsKey(var.getName())) {
+            parent.getVarPool().put(var.getName(), var);
+        }
+        var.setNumber(constant);
     }
 }
