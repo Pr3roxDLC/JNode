@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class Exporter {
-
+    //TODO stop using huge if stacks
     public static void exportProgram(Program program, String name) {
         boolean containsExitInstruction = false;
         StringBuilder output = new StringBuilder();

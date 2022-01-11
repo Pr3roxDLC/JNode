@@ -6,7 +6,7 @@ import me.pr3.JNode.Variable.Var;
 import java.util.HashMap;
 import java.util.Stack;
 
-public class  Program {
+public class Program {
 
     private boolean stop = false;
     private int counter = 0;
@@ -18,35 +18,35 @@ public class  Program {
         return varPool;
     }
 
-    public void setCounter(int counter){
+    public void setCounter(int counter) {
         this.counter = counter;
     }
 
-    public int getCounter(){
+    public int getCounter() {
         return counter;
     }
 
-    public Stack<Integer> getReturnStack(){
+    public Stack<Integer> getReturnStack() {
         return returnStack;
     }
 
-    public Program(){
+    public Program() {
 
     }
 
-    public void stop(){
+    public void stop() {
         stop = true;
     }
 
     public Instruction[] instructions = new Instruction[0];
 
-    public void setInstructions(Instruction[] instructions){
+    public void setInstructions(Instruction[] instructions) {
         this.instructions = instructions;
     }
 
-    public void runProgram(){
+    public void runProgram() {
         counter = 0;
-        while(!stop){
+        while (!stop) {
             instructions[counter].run();
             //increment the counter after executing each instruction
             counter++;

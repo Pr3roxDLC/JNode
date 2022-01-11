@@ -13,14 +13,15 @@ public class AssignConstant extends Instruction {
     public AssignConstant(Program parent, @Nullable Var var, double c) {
         super(parent);
         this.constant = c;
+        //this feels wrong to do
+        if(!parent.getVarPool().containsKey(var.getName())) {
+            parent.getVarPool().put(var.getName(), var);
+        }
         this.var = var;
     }
 
     @Override
     public void run() {
-        if(!parent.getVarPool().containsKey(var.getName())) {
-            parent.getVarPool().put(var.getName(), var);
-        }
         var.setNumber(constant);
     }
 }

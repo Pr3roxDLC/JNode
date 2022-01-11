@@ -1,6 +1,7 @@
 package me.pr3.JNode;
 
 import me.pr3.JNode.IO.Exporter;
+import me.pr3.JNode.IO.Importer;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
@@ -39,6 +40,8 @@ public class Main {
         program.runProgram();
 
         Exporter.exportProgram(program, "test");
+
+        Importer.importProgramFromFile("test").runProgram();
 
     }
 }
