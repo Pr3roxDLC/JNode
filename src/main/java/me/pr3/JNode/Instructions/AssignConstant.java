@@ -1,15 +1,16 @@
 package me.pr3.JNode.Instructions;
 
+import com.sun.istack.internal.Nullable;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
-public class AssignConstant extends Instruction{
+public class AssignConstant extends Instruction {
 
     public Var var = null;
     public double constant = 0;
 
     //Constants/Variables shall always be of type Double,
-    public AssignConstant(Program parent, Var var, double c) {
+    public AssignConstant(Program parent, @Nullable Var var, double c) {
         super(parent);
         this.constant = c;
         this.var = var;

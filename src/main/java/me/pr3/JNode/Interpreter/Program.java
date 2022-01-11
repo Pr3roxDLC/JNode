@@ -4,7 +4,7 @@ import me.pr3.JNode.Instructions.Instruction;
 
 import java.util.Stack;
 
-public class Program {
+public class  Program {
 
     private boolean stop = false;
     private int counter = 0;

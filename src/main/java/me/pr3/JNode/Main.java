@@ -12,26 +12,33 @@ public class Main {
     //address. On top of this, a stack holding all the current return addresses will be needed for the implementation of subroutines as we need to store the
     //return address to where we need to jump back after the subroutine is done
     public static void main(String[] args) {
-        Var var = new Var(5, "Test1");
+        Var var = new Var(0);
+        Var var2 = new Var(0);
+        Var var3 = new Var(0);
+        Var var4 = new Var(0);
         Program program = new Program();
         program.setInstructions(new Instruction[]{
+                new AssignConstant(program, var, 5),
                 new IO(program, var),
-                new CallSubroutine(program, 3),
+                new CallSubroutine(program, 4),
                 new Exit(program),
 
-                new Calculate(program, var, var, new Var(1), Calculate.Operation.ADD),
+                new AssignConstant(program, var2, 1),
+                new Calculate(program, var, var, var2, Calculate.Operation.ADD),
                 new IO(program, var),
-                new CallSubroutine(program, 8),
-                new IO(program, new Var(0)),
+                new CallSubroutine(program, 11),
+                new AssignConstant(program, var4, 0),
+                new IO(program, var4),
                 new ReturnSubroutine(program),
 
-                new IO(program, new Var(100)),
+                new AssignConstant(program, var3, 100),
+                new IO(program, var3),
                 new ReturnSubroutine(program)
         });
 
+        program.runProgram();
 
         Exporter.exportProgram(program, "test");
 
-        program.runProgram();
     }
 }
