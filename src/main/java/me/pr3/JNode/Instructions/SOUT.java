@@ -3,11 +3,11 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
-public class IO extends Instruction{
+public class SOUT extends Instruction{
 
     public Var output = null;
 
-    public IO(Program parent, Var output){
+    public SOUT(Program parent, Var output){
         super(parent);
         this.output = output;
 

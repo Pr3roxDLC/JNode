@@ -1,10 +1,8 @@
 package me.pr3.JNode.IO;
 
-import com.sun.istack.internal.NotNull;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Locale;
@@ -44,9 +42,9 @@ public class Exporter {
                 containsExitInstruction = true;
                 output.append(exit.getClass().getSimpleName().toUpperCase(Locale.ROOT));
             }
-            if(instruction instanceof IO){
-                IO io = (IO) instruction;
-                output.append(io.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(io.output.getName()).append("]");
+            if(instruction instanceof SOUT){
+                SOUT SOUT = (SOUT) instruction;
+                output.append(SOUT.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(SOUT.output.getName()).append("]");
             }
             if(instruction instanceof Jump){
                 Jump jump = (Jump) instruction;

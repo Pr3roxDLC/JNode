@@ -20,20 +20,20 @@ public class Main {
         Program program = new Program();
         program.setInstructions(new Instruction[]{
                 new AssignConstant(program, var, 5),
-                new IO(program, var),
+                new SOUT(program, var),
                 new CallSubroutine(program, 4),
                 new Exit(program),
 
                 new AssignConstant(program, var2, 1),
                 new Calculate(program, var, var, var2, Calculate.Operation.ADD),
-                new IO(program, var),
+                new SOUT(program, var),
                 new CallSubroutine(program, 11),
                 new AssignConstant(program, var4, 0),
-                new IO(program, var4),
+                new SOUT(program, var4),
                 new ReturnSubroutine(program),
 
                 new AssignConstant(program, var3, 100),
-                new IO(program, var3),
+                new SOUT(program, var3),
                 new ReturnSubroutine(program)
         });
 
@@ -41,7 +41,7 @@ public class Main {
 
         Exporter.exportProgram(program, "test");
 
-        Importer.importProgramFromFile("test").runProgram();
+        Exporter.exportProgram(Importer.importProgramFromFile("test"), "test2");
 
     }
 }

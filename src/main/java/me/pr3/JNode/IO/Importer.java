@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 
 public class Importer {
@@ -59,8 +58,8 @@ public class Importer {
             if(line.startsWith(Exit.class.getSimpleName().toUpperCase(Locale.ROOT))){
                 instructionList.add(new Exit(program));
             }
-            if(line.startsWith(IO.class.getSimpleName().toUpperCase(Locale.ROOT))){
-                instructionList.add(new IO(program, program.getVarPool().get(vars[0])));
+            if(line.startsWith(SOUT.class.getSimpleName().toUpperCase(Locale.ROOT))){
+                instructionList.add(new SOUT(program, program.getVarPool().get(vars[0])));
             }
             if(line.startsWith(Jump.class.getSimpleName().toUpperCase(Locale.ROOT))){
                 instructionList.add(new Jump(program, Integer.parseInt(vars[0])));
