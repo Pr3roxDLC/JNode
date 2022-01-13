@@ -1,11 +1,16 @@
 package me.pr3.JNode.gui;
 
 
+import me.pr3.JNode.gui.blocks.Block;
+import me.pr3.JNode.gui.blocks.ControlBloks.WhileLoop;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -65,8 +70,15 @@ public class GUI implements Runnable {
 
     @Override
     public void run() {
-        while(true){
-            //Do Program Loop
+
+        BlockManager.scripts.put("OnClientTick", new Script(Arrays.asList(new Block[]{new WhileLoop(50, 50, 0, new ArrayList<>())})));
+        try {
+            while (true) {
+                BlockRenderer.render();
+                Thread.sleep(16);
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
         }
     }
 }
