@@ -5,6 +5,7 @@ import me.pr3.JNode.IO.Importer;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
+import me.pr3.JNode.gui.GUI;
 
 public class Main {
 
@@ -42,6 +43,8 @@ public class Main {
         Exporter.exportProgram(program, "test");
 
         Exporter.exportProgram(Importer.importProgramFromFile("test"), "test2");
+
+        GUI.initGUI();
 
     }
 }
