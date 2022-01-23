@@ -21,46 +21,34 @@ public class Compare extends Instruction{
     public void run() {
         switch (operation){
             case SMALLER:
-                if(in1.getNumber().doubleValue() < in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() < in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case SMALLER_OR_EQUAL:
-                if(in1.getNumber().doubleValue() <= in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() <= in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case EQUAL:
-                if(in1.getNumber().doubleValue() == in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() == in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case GREATER_OR_EQUAL:
-                if(in1.getNumber().doubleValue() >= in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() >= in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case GREATER:
-                if(in1.getNumber().doubleValue() > in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() > in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case UNEQUAL:
-                if(in1.getNumber().doubleValue() != in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() != in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
         }
     }
@@ -73,4 +61,5 @@ public class Compare extends Instruction{
         GREATER,
         UNEQUAL
     }
+
 }

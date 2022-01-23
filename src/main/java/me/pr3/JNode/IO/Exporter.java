@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class Exporter {
+
     //TODO stop using huge if stacks
     public static void exportProgram(Program program, String name) {
         boolean containsExitInstruction = false;
@@ -56,9 +57,9 @@ public class Exporter {
             }
             output.append(System.lineSeparator());
         }
-        if (!containsExitInstruction) {
+        if (!containsExitInstruction)
             System.out.println("Exported Program with no Exit instruction");
-        }
+
         createFile(output.toString(), name);
     }
 

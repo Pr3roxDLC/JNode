@@ -10,11 +10,11 @@ public class SOUT extends Instruction{
     public SOUT(Program parent, Var output){
         super(parent);
         this.output = output;
-
     }
 
     @Override
     public void run() {
         System.out.println(output.getNumber().toString());
     }
+
 }

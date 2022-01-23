@@ -16,4 +16,5 @@ public class Jump extends Instruction {
     public void run() {
         parent.setCounter(pointer - 1);
     }
+
 }

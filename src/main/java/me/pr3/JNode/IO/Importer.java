@@ -23,7 +23,6 @@ public class Importer {
 
         //TODO stop using huge if stacks
         for (String line : lines) {
-
             String end = "";
             String[] vars = new String[0];
             if (line.contains("[")) {
@@ -32,7 +31,6 @@ public class Importer {
                 end = end.replace(" ", "");
                 vars = end.split(",");
             }
-
             if (line.startsWith(AssignConstant.class.getSimpleName().toUpperCase(Locale.ROOT))) {
                 if(program.getVarPool().containsKey(vars[0])){
                     instructionList.add(new AssignConstant(program, program.getVarPool().get(vars[0]), Double.parseDouble(vars[1])));
@@ -40,34 +38,34 @@ public class Importer {
                     instructionList.add(new AssignConstant(program, new Var(0, vars[0]), Double.parseDouble(vars[1])));
                 }
             }
-            if(line.startsWith(Calculate.class.getSimpleName().toUpperCase(Locale.ROOT))){
+            if(line.startsWith(Calculate.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new Calculate(program, program.getVarPool().get(vars[0]), program.getVarPool().get(vars[1]), program.getVarPool().get(vars[2]), Calculate.Operation.valueOf(vars[3])));
-            }
-            if(line.startsWith(CallSubroutine.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(CallSubroutine.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new CallSubroutine(program, Integer.parseInt(vars[0])));
-            }
-            if(line.startsWith(Compare.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(Compare.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new Compare(program, program.getVarPool().get(vars[0]), program.getVarPool().get(vars[1]), program.getVarPool().get(vars[2]), Compare.Operation.valueOf(vars[3])));
-            }
-            if(line.startsWith(CompareJumpIfNotEqual.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(CompareJumpIfNotEqual.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new CompareJumpIfNotEqual(program, program.getVarPool().get(vars[0]), program.getVarPool().get(vars[1]), Integer.parseInt(vars[2])));
-            }
-            if(line.startsWith(CompareJumpIfNotZero.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(CompareJumpIfNotZero.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new CompareJumpIfNotZero(program, program.getVarPool().get(vars[0]), Integer.parseInt(vars[1])));
-            }
-            if(line.startsWith(Exit.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(Exit.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new Exit(program));
-            }
-            if(line.startsWith(SOUT.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(SOUT.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new SOUT(program, program.getVarPool().get(vars[0])));
-            }
-            if(line.startsWith(Jump.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(Jump.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new Jump(program, Integer.parseInt(vars[0])));
-            }
-            if(line.startsWith(ReturnSubroutine.class.getSimpleName().toUpperCase(Locale.ROOT))){
+
+            if(line.startsWith(ReturnSubroutine.class.getSimpleName().toUpperCase(Locale.ROOT)))
                 instructionList.add(new ReturnSubroutine(program));
-            }
         }
+
         program.setInstructions(instructionList.toArray(new Instruction[0]));
         return program;
     }
@@ -78,9 +76,9 @@ public class Importer {
         try {
             File myObj = new File(fileName + ".jn");
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                str += myReader.nextLine() + "\n";
-            }
+            while (myReader.hasNextLine())
+                str += myReader.nextLine() + System.lineSeparator();
+
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

@@ -13,7 +13,8 @@ public class CallSubroutine extends  Instruction{
 
     @Override
     public void run() {
-            parent.getReturnStack().push(parent.getCounter());
-            parent.setCounter(subroutineAddress - 1);
+        parent.getReturnStack().push(parent.getCounter());
+        parent.setCounter(subroutineAddress - 1);
     }
+
 }

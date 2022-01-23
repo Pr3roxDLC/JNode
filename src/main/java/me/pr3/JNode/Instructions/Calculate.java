@@ -46,4 +46,5 @@ public class Calculate extends Instruction {
         DIVIDE,
         MODULO
     }
+
 }

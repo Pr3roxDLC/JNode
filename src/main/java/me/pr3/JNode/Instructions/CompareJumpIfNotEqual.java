@@ -17,8 +17,8 @@ public class CompareJumpIfNotEqual extends Instruction {
 
     @Override
     public void run() {
-        if (in1.getNumber().doubleValue() != in2.getNumber().doubleValue()) {
+        if (in1.getNumber().doubleValue() != in2.getNumber().doubleValue())
             parent.setCounter(pointer - 1);
-        }
     }
+
 }
