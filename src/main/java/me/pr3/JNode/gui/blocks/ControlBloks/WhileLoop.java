@@ -8,7 +8,7 @@ import java.util.Collection;
 public class WhileLoop extends ControlBlock {
 
     public WhileLoop(int x, int y, int layer, Collection<Block> children){
-        super(x, y, Color.CYAN, layer);
+        super(x, y, Color.DARK_GRAY, layer);
         setWidth(200);
         setHeight(100);
         getChildren().addAll(children);

@@ -3,6 +3,7 @@ package me.pr3.JNode.gui;
 
 import me.pr3.JNode.gui.blocks.Block;
 import me.pr3.JNode.gui.blocks.ControlBloks.WhileLoop;
+import me.pr3.JNode.gui.blocks.HeadBlocks.OnEventBlock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,7 +71,7 @@ public class GUI implements Runnable {
 
     @Override
     public void run() {
-        BlockManager.scripts.put("OnClientTick", new Script(Arrays.asList(new Block[]{new WhileLoop(50, 50, 0, new ArrayList<>())})));
+        BlockManager.scripts.put("OnClientTick", new Script(Arrays.asList(new OnEventBlock(50, 100, 0),new WhileLoop(50, 50, 0, new ArrayList<>()))));
         try {
             while (true) {
                 BlockRenderer.render();
