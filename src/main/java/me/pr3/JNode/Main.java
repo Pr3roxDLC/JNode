@@ -46,7 +46,7 @@ public class Main {
 
         Exporter.exportProgram(Importer.importProgramFromFile("test"), "test2");
 
-        //GUI.initGUI();
+        GUI.initGUI();
 
     }
 

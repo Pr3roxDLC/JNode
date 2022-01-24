@@ -36,11 +36,6 @@ public class Importer {
                 if(line.startsWith(inst.getSimpleName().toUpperCase(Locale.ROOT)))
                     instructionList.add((Instruction) inst.getDeclaredConstructor(Program.class, String[].class).newInstance(program, vars));
             }
-            if (line.startsWith(AssignConstant.class.getSimpleName().toUpperCase(Locale.ROOT))) {
-                if(program.getVarPool().containsKey(vars[0]))
-                    instructionList.add(new AssignConstant(program, program.getVarPool().get(vars[0]), Double.parseDouble(vars[1])));
-                else instructionList.add(new AssignConstant(program, new Var(0, vars[0]), Double.parseDouble(vars[1])));
-            }
         }
 
         program.setInstructions(instructionList.toArray(new Instruction[0]));
