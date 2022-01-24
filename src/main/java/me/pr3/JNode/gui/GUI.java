@@ -34,13 +34,13 @@ public class GUI implements Runnable {
 
         Thread f = new Thread(new GUI());
         f.run();
-
     }
 
     public static MenuBar getMenu() {
         MenuBar menuBar = new MenuBar();
         Menu fileMenu = new Menu("File");
         MenuItem loadItem = new MenuItem("Load");
+
         loadItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -48,11 +48,11 @@ public class GUI implements Runnable {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
                 int result = fileChooser.showOpenDialog(frame);
-                if (result == JFileChooser.APPROVE_OPTION) {
+                if (result == JFileChooser.APPROVE_OPTION)
                     loadedFile = fileChooser.getSelectedFile();
-                }
             }
         });
+
         fileMenu.add(loadItem);
         MenuItem saveItem = new MenuItem("Save");
         saveItem.addActionListener(new ActionListener() {
@@ -62,15 +62,14 @@ public class GUI implements Runnable {
                 System.out.println("Saving File");
             }
         });
-        fileMenu.add(saveItem);
 
+        fileMenu.add(saveItem);
         menuBar.add(fileMenu);
         return menuBar;
     }
 
     @Override
     public void run() {
-
         BlockManager.scripts.put("OnClientTick", new Script(Arrays.asList(new Block[]{new WhileLoop(50, 50, 0, new ArrayList<>())})));
         try {
             while (true) {
@@ -81,4 +80,5 @@ public class GUI implements Runnable {
             e.printStackTrace();
         }
     }
+
 }

@@ -3,6 +3,7 @@ package me.pr3.JNode.gui.blocks;
 import java.awt.*;
 
 public abstract class Block {
+
     private int x,y = 0;
     private int width, height = 50;
     private int layer = 0;
@@ -41,7 +42,7 @@ public abstract class Block {
     }
 
     protected int getLayer() {
-        return layer;
+        return this.layer;
     }
 
     protected void setLayer(int layer) {
@@ -64,4 +65,5 @@ public abstract class Block {
     }
 
     public abstract void draw(Graphics2D g);
+
 }

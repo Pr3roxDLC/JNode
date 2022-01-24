@@ -1,6 +1,6 @@
 package me.pr3.JNode.Interpreter;
 
-import me.pr3.JNode.Instructions.Instruction;
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Variable.Var;
 
 import java.util.HashMap;
@@ -11,6 +11,7 @@ public class Program {
     private boolean stop = false;
     private int counter = 0;
     private Stack<Integer> returnStack = new Stack<>();
+
     //The VariablePool is the one centralized position where we get the variable from after importing a script
     private HashMap<String, Var> varPool = new HashMap<>();
 
@@ -31,7 +32,6 @@ public class Program {
     }
 
     public Program() {
-
     }
 
     public void stop() {

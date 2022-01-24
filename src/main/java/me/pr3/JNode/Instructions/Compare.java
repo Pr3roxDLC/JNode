@@ -1,9 +1,10 @@
 package me.pr3.JNode.Instructions;
 
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
-public class Compare extends Instruction{
+public class Compare extends Instruction {
 
     public Var out, in1, in2 = null;
     public Operation operation = Operation.SMALLER;
@@ -17,50 +18,46 @@ public class Compare extends Instruction{
         this.operation = operation;
     }
 
+    public Compare(Program parent, String[] vars) {
+        super(parent);
+        this.out = parent.getVarPool().get(vars[0]);
+        this.in1 = parent.getVarPool().get(vars[1]);
+        this.in2 = parent.getVarPool().get(vars[2]);
+        this.operation = Compare.Operation.valueOf(vars[3]);
+    }
+
     @Override
     public void run() {
         switch (operation){
             case SMALLER:
-                if(in1.getNumber().doubleValue() < in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() < in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case SMALLER_OR_EQUAL:
-                if(in1.getNumber().doubleValue() <= in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() <= in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case EQUAL:
-                if(in1.getNumber().doubleValue() == in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() == in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case GREATER_OR_EQUAL:
-                if(in1.getNumber().doubleValue() >= in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() >= in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case GREATER:
-                if(in1.getNumber().doubleValue() > in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() > in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
             case UNEQUAL:
-                if(in1.getNumber().doubleValue() != in2.getNumber().doubleValue()){
+                if(in1.getNumber().doubleValue() != in2.getNumber().doubleValue())
                     out.setNumber(1);
-                }else{
-                    out.setNumber(0);
-                }
+                else out.setNumber(0);
                 break;
         }
     }
@@ -73,4 +70,5 @@ public class Compare extends Instruction{
         GREATER,
         UNEQUAL
     }
+
 }

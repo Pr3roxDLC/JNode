@@ -3,6 +3,7 @@ package me.pr3.JNode.Variable;
 public class Var {
 
     private Number number = null;
+    private String name = "";
 
     public Number getNumber() {
         return number;
@@ -20,17 +21,14 @@ public class Var {
         this.name = name;
     }
 
-    private String name = "";
-
     public Var(Number number, String name){
         this.number = number;
         this.name = name;
     }
+
     public Var(Number number){
         this.number = number;
         this.name = "v"+String.valueOf(Integer.toHexString(this.hashCode()));
     }
-
-
 
 }
