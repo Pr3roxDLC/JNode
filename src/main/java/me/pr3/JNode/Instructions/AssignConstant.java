@@ -1,7 +1,5 @@
 package me.pr3.JNode.Instructions;
 
-import com.sun.istack.internal.Nullable;
-import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 

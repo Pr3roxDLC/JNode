@@ -1,6 +1,5 @@
 package me.pr3.JNode.Instructions;
 
-import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 
 public class Jump extends Instruction {

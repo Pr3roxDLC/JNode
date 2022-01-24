@@ -1,9 +1,7 @@
 package me.pr3.JNode.IO;
 
-import me.pr3.JNode.Instruction;
-import me.pr3.JNode.Instructions.*;
+import me.pr3.JNode.Instructions.Instruction;
 import me.pr3.JNode.Interpreter.Program;
-import me.pr3.JNode.Variable.Var;
 
 import java.io.File;
 import java.io.FileNotFoundException;
