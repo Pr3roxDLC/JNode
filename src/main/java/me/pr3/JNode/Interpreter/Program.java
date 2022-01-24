@@ -1,6 +1,6 @@
 package me.pr3.JNode.Interpreter;
 
-import me.pr3.JNode.Instructions.Instruction;
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Variable.Var;
 
 import java.util.HashMap;

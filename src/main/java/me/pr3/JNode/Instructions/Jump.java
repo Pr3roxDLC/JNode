@@ -1,5 +1,6 @@
 package me.pr3.JNode.Instructions;
 
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 
 public class Jump extends Instruction {
@@ -10,6 +11,11 @@ public class Jump extends Instruction {
     public Jump(Program parent, int pointer) {
         super(parent);
         this.pointer = pointer;
+    }
+
+    public Jump(Program parent, String[] vars) {
+        super(parent);
+        this.pointer = Integer.parseInt(vars[0]);
     }
 
     @Override

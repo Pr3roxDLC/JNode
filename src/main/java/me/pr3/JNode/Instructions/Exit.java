@@ -1,5 +1,6 @@
 package me.pr3.JNode.Instructions;
 
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 
 /*
@@ -9,6 +10,10 @@ import me.pr3.JNode.Interpreter.Program;
 public class Exit extends Instruction {
 
     public Exit(Program parent) {
+        super(parent);
+    }
+
+    public Exit(Program parent, String[] vars) {
         super(parent);
     }
 

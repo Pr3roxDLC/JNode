@@ -1,5 +1,6 @@
 package me.pr3.JNode.Instructions;
 
+import me.pr3.JNode.Instruction;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
@@ -14,6 +15,14 @@ public class Calculate extends Instruction {
         this.in1 = in1;
         this.in2 = in2;
         this.operation = operation;
+    }
+
+    public Calculate(Program parent, String[] vars) {
+        super(parent);
+        this.out = parent.getVarPool().get(vars[0]);
+        this.in1 = parent.getVarPool().get(vars[1]);
+        this.in2 = parent.getVarPool().get(vars[2]);
+        this.operation = Calculate.Operation.valueOf(vars[3]);
     }
 
     @Override
