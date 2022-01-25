@@ -1,9 +1,8 @@
 package me.pr3.JNode.Instructions;
 
-import javassist.tools.reflect.Reflection;
-import jdk.nashorn.internal.codegen.CompilerConstants;
+
 import me.pr3.JNode.Interpreter.Program;
-import org.reflections.Reflections;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
