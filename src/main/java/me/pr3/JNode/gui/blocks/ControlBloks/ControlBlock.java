@@ -15,12 +15,8 @@ public abstract class ControlBlock extends Block {
         return children;
     }
 
-    public void drawChildren(){
-        children.forEach(n -> n.draw((Graphics2D) GUI.frame.getGraphics()));
-    }
-
-    public ControlBlock(int x, int y, Color color, int layer) {
-        super(x, y, color, layer);
+    public ControlBlock(Color color, int layer) {
+        super( color, layer);
     }
 
 }

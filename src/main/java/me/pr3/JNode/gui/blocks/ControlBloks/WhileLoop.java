@@ -7,17 +7,12 @@ import java.util.Collection;
 
 public class WhileLoop extends ControlBlock {
 
-    public WhileLoop(int x, int y, int layer, Collection<Block> children){
-        super(x, y, Color.DARK_GRAY, layer);
+    public WhileLoop(int layer, Collection<Block> children){
+        super(Color.DARK_GRAY, layer);
         setWidth(200);
         setHeight(100);
         getChildren().addAll(children);
     }
 
-    @Override
-    public void draw(Graphics2D g) {
-        g.setColor(getColor());
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
-    }
 
 }

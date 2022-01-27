@@ -16,10 +16,16 @@ import java.util.Arrays;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUI implements Runnable {
+    //Internal Varialbles
+    boolean shouldclose = false;
     //GUI Parent
     public static JFrame frame;
 
+    //FileIO
     public static File loadedFile;
+
+    //Script
+    public static Script script;
 
     public static void initGUI() {
         frame = new JFrame("JNode Editor");
@@ -71,15 +77,28 @@ public class GUI implements Runnable {
 
     @Override
     public void run() {
-        BlockManager.scripts.put("OnClientTick", new Script(Arrays.asList(new OnEventBlock(50, 100, 0),new WhileLoop(50, 50, 0, new ArrayList<>()))));
-        try {
-            while (true) {
-                BlockRenderer.render();
+        onLoad();
+        while(!shouldclose){
+            onUpdate();
+            try {
                 Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }catch (InterruptedException e){
-            e.printStackTrace();
         }
+    }
+
+    private void onUpdate() {
+        System.out.println("");
+        script.drawScriptBlocks((Graphics2D) frame.getGraphics());
+    }
+
+    private void onLoad() {
+        script = new Script(new ArrayList<>());
+        SubScript subScript = new SubScript();
+        subScript.getBlocks().add(new OnEventBlock(0));
+        subScript.getBlocks().add(new WhileLoop(0, new ArrayList<>()));
+        script.subScripts.add(subScript);
     }
 
 }
