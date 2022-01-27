@@ -3,6 +3,7 @@ package me.pr3.JNode.GUI;
 
 import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
+import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,7 +88,6 @@ public class GUI implements Runnable {
     }
 
     private void onUpdate() {
-        System.out.println("");
         script.drawScriptBlocks((Graphics2D) frame.getGraphics());
     }
 
@@ -96,6 +96,7 @@ public class GUI implements Runnable {
         SubScript subScript = new SubScript();
         subScript.getBlocks().add(new OnEventBlock(0));
         subScript.getBlocks().add(new WhileLoop(0, new ArrayList<>()));
+        subScript.getBlocks().add(new SetVarBlock(0));
         script.subScripts.add(subScript);
     }
 
