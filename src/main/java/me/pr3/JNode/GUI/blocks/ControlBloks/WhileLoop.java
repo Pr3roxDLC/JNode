@@ -1,6 +1,6 @@
-package me.pr3.JNode.gui.blocks.ControlBloks;
+package me.pr3.JNode.GUI.blocks.ControlBloks;
 
-import me.pr3.JNode.gui.blocks.Block;
+import me.pr3.JNode.GUI.blocks.Block;
 
 import java.awt.*;
 import java.util.Collection;

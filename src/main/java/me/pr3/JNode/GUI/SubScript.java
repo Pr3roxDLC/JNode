@@ -1,6 +1,6 @@
-package me.pr3.JNode.gui;
+package me.pr3.JNode.GUI;
 
-import me.pr3.JNode.gui.blocks.Block;
+import me.pr3.JNode.GUI.blocks.Block;
 
 import java.util.ArrayList;
 

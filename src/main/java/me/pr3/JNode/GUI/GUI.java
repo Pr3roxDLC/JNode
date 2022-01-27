@@ -1,9 +1,8 @@
-package me.pr3.JNode.gui;
+package me.pr3.JNode.GUI;
 
 
-import me.pr3.JNode.gui.blocks.Block;
-import me.pr3.JNode.gui.blocks.ControlBloks.WhileLoop;
-import me.pr3.JNode.gui.blocks.HeadBlocks.OnEventBlock;
+import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
+import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 

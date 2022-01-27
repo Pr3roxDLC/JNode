@@ -1,4 +1,4 @@
-package me.pr3.JNode.gui.blocks;
+package me.pr3.JNode.GUI.blocks;
 
 import java.awt.*;
 

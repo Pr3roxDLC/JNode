@@ -1,4 +1,4 @@
-package me.pr3.JNode.gui.blocks.HeadBlocks;
+package me.pr3.JNode.GUI.blocks.HeadBlocks;
 
 import java.awt.*;
 

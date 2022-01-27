@@ -1,4 +1,4 @@
-package me.pr3.JNode.gui;
+package me.pr3.JNode.GUI;
 
 import java.awt.*;
 import java.util.ArrayList;

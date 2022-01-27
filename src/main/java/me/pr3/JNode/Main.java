@@ -5,7 +5,7 @@ import me.pr3.JNode.IO.Importer;
 import me.pr3.JNode.Instructions.*;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
-import me.pr3.JNode.gui.GUI;
+import me.pr3.JNode.GUI.GUI;
 
 import java.lang.reflect.InvocationTargetException;
 
