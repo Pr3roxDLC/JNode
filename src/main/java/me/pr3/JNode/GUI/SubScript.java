@@ -48,11 +48,11 @@ public class SubScript {
 
     public void handleMouseEvent(MouseEvent event, @Nullable EventType eventType){
         if(eventType == null)return;
-        System.out.println(eventType.toString());
+        //System.out.println(eventType.toString());
         if(eventType == EventType.PRESSED){
             if(getBoundingBox().contains(event.getPoint())){
                 isBound = true;
-                System.out.println("Bound to script");
+                //System.out.println("Bound to script");
             }
         }
         if(eventType == EventType.RELEASED){
@@ -64,7 +64,7 @@ public class SubScript {
         if(isBoundingBoxOutdated){
             height = GuiUtil.getSubScriptHeight(this);
             width = GuiUtil.getSubScriptWidth(this);
-            System.out.println("Calculated " + height + " " + width);
+            //System.out.println("Calculated " + height + " " + width);
             isBoundingBoxOutdated = false;
         }
         return new Rectangle2D.Double(x , y, width, height);
