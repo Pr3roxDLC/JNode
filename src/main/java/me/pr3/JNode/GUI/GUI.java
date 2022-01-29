@@ -1,7 +1,6 @@
 package me.pr3.JNode.GUI;
 
 
-import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
@@ -23,7 +22,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUI extends JPanel implements Runnable {
     //Internal Varialbles
-    boolean shouldclose = false;
+    boolean shouldClose = false;
     //GUI Parent
     public static JFrame frame;
     Image dbImage = null;
@@ -117,7 +116,7 @@ public class GUI extends JPanel implements Runnable {
     @Override
     public void run() {
         onLoad();
-        while (!shouldclose) {
+        while (!shouldClose) {
             onUpdate();
             try {
                 Thread.sleep(16);
