@@ -16,6 +16,8 @@ public class Main {
     //address. On top of this, a stack holding all the current return addresses will be needed for the implementation of subroutines as we need to store the
     //return address to where we need to jump back after the subroutine is done
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        //=============================BYTECODE-TESTS=================================================
+        //This is just some testing stuff, has to be removed in the final product
         Var var = new Var(0);
         Var var2 = new Var(0);
         Var var3 = new Var(0);
@@ -45,6 +47,8 @@ public class Main {
         Exporter.exportProgram(program, "test");
 
         Exporter.exportProgram(Importer.importProgramFromFile("test"), "test2");
+
+        //=============================BYTE-CODE-TEST-END=====================================
 
         GUI.initGUI();
 
