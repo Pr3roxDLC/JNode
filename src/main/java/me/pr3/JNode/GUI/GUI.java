@@ -130,8 +130,8 @@ public class GUI extends JPanel implements Runnable {
 
     @Override
     public void paint(final Graphics g) {
-        System.out.println("Painted");
-        //super.paint(g);
+        //System.out.println("Painted");
+        super.paint(g);
         final Dimension d = getSize();
         if (dbImage == null) {
             // Double-buffer: clear the offscreen image.
