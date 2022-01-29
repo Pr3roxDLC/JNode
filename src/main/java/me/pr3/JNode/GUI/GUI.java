@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,11 +21,16 @@ import java.util.Collections;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class GUI implements Runnable {
+public class GUI extends JPanel implements Runnable {
     //Internal Varialbles
     boolean shouldclose = false;
     //GUI Parent
     public static JFrame frame;
+    Image dbImage = null;
+    Graphics dbg = null;
+    int width = 1920;
+    int height = 1080;
+
 
     //FileIO
     public static File loadedFile;
@@ -39,11 +47,39 @@ public class GUI implements Runnable {
         //Initialize the Menu Bar
         frame.setMenuBar(getMenu());
 
+        //Looks ugly, maybe find a better way of doing this, custom MouseListener Factory class?
+        frame.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.CLICKED));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.PRESSED));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.RELEASED));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, null));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, null));
+            }
+        });
+
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
 
         Thread f = new Thread(new GUI());
-        f.run();
+        f.start();
     }
 
     public static MenuBar getMenu() {
@@ -81,7 +117,7 @@ public class GUI implements Runnable {
     @Override
     public void run() {
         onLoad();
-        while(!shouldclose){
+        while (!shouldclose) {
             onUpdate();
             try {
                 Thread.sleep(16);
@@ -91,8 +127,28 @@ public class GUI implements Runnable {
         }
     }
 
+
+    @Override
+    public void paint(final Graphics g) {
+        System.out.println("Painted");
+        super.paint(g);
+        final Dimension d = getSize();
+        if (dbImage == null) {
+            // Double-buffer: clear the offscreen image.
+            dbImage = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
+            dbg = dbImage.getGraphics();
+
+        }
+        dbg.setColor(Color.WHITE);
+        dbg.fillRect(0, 0 , 1920, 1080);
+
+        script.drawScriptBlocks((Graphics2D) dbg);
+
+        g.drawImage(dbImage, 0, 0, null);
+    }
+
     private void onUpdate() {
-        script.drawScriptBlocks((Graphics2D) frame.getGraphics());
+        paint(frame.getGraphics());
     }
 
     private void onLoad() {

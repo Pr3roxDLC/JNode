@@ -35,6 +35,11 @@ public class Script {
                 }
             });
 
+            if(n.isBound()){
+               n.setX(GUI.frame.getMousePosition().x);
+               n.setY(GUI.frame.getMousePosition().y);
+            }
+
             n.getBlocks().forEach(block -> {
                 drawBlock2(block, g, n.getX(), n.getY(), extraWidth.get());
             });
