@@ -2,6 +2,7 @@ package me.pr3.JNode.GUI;
 
 
 import me.pr3.JNode.GUI.blocks.Block;
+import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
 import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
@@ -99,7 +100,7 @@ public class GUI implements Runnable {
         SubScript subScript = new SubScript();
         subScript.getBlocks().add(new OnEventBlock(0));
         subScript.getBlocks().add(new WhileLoop(0, new ArrayList<>(Arrays.asList(new SetVarBlock(0),
-                new WhileLoop(0, new ArrayList<>(Collections.singletonList(new SetVarBlock(0))))))));
+                new IfBlock(0, new ArrayList<>(Collections.singletonList(new SetVarBlock(0))))))));
         subScript.getBlocks().add(new SetVarBlock(0));
         script.subScripts.add(subScript);
     }

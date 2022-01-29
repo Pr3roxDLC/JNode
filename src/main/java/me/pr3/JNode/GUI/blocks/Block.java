@@ -45,7 +45,7 @@ public abstract class Block {
     public Block(Color color, int layer){
         this.color = color;
         this.layer = layer;
-
+        this.width = 200;
     }
 
 

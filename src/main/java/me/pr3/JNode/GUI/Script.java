@@ -36,10 +36,41 @@ public class Script {
             });
 
             n.getBlocks().forEach(block -> {
-                yOffset+= block.getHeight();
-                drawBlock(block, g, n.getX(), n.getY(), extraWidth.get());
+                drawBlock2(block, g, n.getX(), n.getY(), extraWidth.get());
             });
         });
+    }
+
+
+    private void drawBlock2(Block block, Graphics2D g, int x, int y, int extraWidth){
+        if(block instanceof ControlBlock){
+            g.setColor(block.getColor());
+            g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            //Increase the yOffset For the Header of the Control Block
+            yOffset += block.getHeight();
+
+            int oldYOffset = yOffset;
+            int oldXOffset = xOffset;
+
+            xOffset += 10;
+            ((ControlBlock) block).getChildren().forEach(child -> {
+                drawBlock2(child, g, x, y, extraWidth);
+            });
+            xOffset -= 10;
+
+            //Draw the vertical line from the footer to the header
+            g.setColor(block.getColor());
+            g.fillRect(x + oldXOffset, y + oldYOffset, 10, yOffset - oldYOffset);
+
+            g.setColor(block.getColor());
+            g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, 10);
+            //Increase the yOffset for the footer of the Control Block
+            yOffset += 10;
+        }else{
+            g.setColor(block.getColor());
+            g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            yOffset += block.getHeight();
+        }
     }
 
     //TODO Find out why Nested Loops are not rendered correctly
@@ -49,19 +80,21 @@ public class Script {
             //Draw the top part of the Control Block
             g.setColor(block.getColor());
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            yOffset += block.getHeight();
             xOffset += 10;
             ((ControlBlock) block).getChildren().forEach(child -> {
                 //Draw Children + Side Part
                 g.setColor(block.getColor());
                 g.fillRect(x + xOffset - 10, y + yOffset, 10, child.getHeight());
                 yOffset += child.getHeight();
-                System.out.println("Drawing Children with xOffset: " + xOffset);
+                System.out.println("Drawing Children of: " + block.getClass().getSimpleName() + " with xOffset: " + xOffset);
                 drawBlock(child, g, x, y, extraWidth);
             });
-            xOffset -= 10;
-            //Draw the end of it
+            System.out.println("Drawing the end of: " + block.getClass().getSimpleName());
             g.setColor(block.getColor());
-            g.fillRect(x + xOffset, y + yOffset, block.getWidth()  + extraWidth - xOffset, block.getHeight());
+            g.fillRect(x + xOffset, y + yOffset, block.getWidth()  + extraWidth - xOffset, 10);
+            xOffset -= 10;
+            yOffset += 10;
         }else{
             //do the actual drawing of all non control blocks
             g.setColor(block.getColor());

@@ -13,7 +13,7 @@ public class WhileLoop extends ControlBlock {
     public WhileLoop(int layer, Collection<Block> children){
         super(Color.DARK_GRAY, layer);
         setWidth(200);
-        setHeight(100);
+        setHeight(50);
         getChildren().addAll(children);
     }
 }
