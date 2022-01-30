@@ -5,9 +5,12 @@ import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Optional;
 
 public class SubScript {
 
@@ -51,7 +54,31 @@ public class SubScript {
         //System.out.println(eventType.toString());
         if(eventType == EventType.PRESSED){
             if(getBoundingBox().contains(event.getPoint())){
-                isBound = true;
+
+
+              Optional<Map.Entry<Block, Rectangle>> clickedOn =  GuiUtil.getBoundingBoxes(this).stream()
+                    .filter(n -> n.getValue().contains(event.getPoint()))
+                    .findFirst();
+              clickedOn.ifPresent(n -> {
+                  Block block = clickedOn.get().getKey();
+
+                  //If we clicked on the Top Block, dont split the script
+                  if(block == getBlocks().get(0)){
+                      this.isBound = true;
+                  }
+
+                  ArrayList<Block> blocksBelow = new ArrayList<>(GuiUtil.getBlocksBelowBlock(block, this));
+                  SubScript newSubScript = new SubScript();
+                  newSubScript.getBlocks().addAll(blocksBelow);
+                  newSubScript.setX(event.getX());
+                  newSubScript.setY(event.getY());
+                  GUI.script.subScripts.add(newSubScript);
+                  newSubScript.isBound = true;
+                  System.out.println(block.getClass().getSimpleName());
+                  GuiUtil.deleteBlocksFromScript(blocksBelow, this);
+              });
+
+
                 //System.out.println("Bound to script");
             }
         }
@@ -79,5 +106,6 @@ public class SubScript {
         CLICKED,
         RELEASED
     }
+
 
 }

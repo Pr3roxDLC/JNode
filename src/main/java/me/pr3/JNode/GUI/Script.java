@@ -7,14 +7,15 @@ import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Script {
 
-    public ArrayList<SubScript> subScripts = new ArrayList<>();
+    public CopyOnWriteArrayList<SubScript> subScripts = new CopyOnWriteArrayList<>();
 
     public Script(Collection<SubScript> subScripts){
-        this.subScripts = new ArrayList<>(subScripts);
+        this.subScripts = new CopyOnWriteArrayList<>(subScripts);
     }
 
     private int xOffset, yOffset = 0;
