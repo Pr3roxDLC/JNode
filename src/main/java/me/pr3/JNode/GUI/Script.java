@@ -42,6 +42,9 @@ public class Script {
 
             n.getBlocks().forEach(block -> {
                 drawBlock2(block, g, n.getX(), n.getY(), extraWidth.get());
+                g.setColor(Color.BLACK);
+                //DEBUG Draw Collision Box
+                g.drawRect(n.getX(), n.getY(), (int) n.getBoundingBox().getWidth(), (int) n.getBoundingBox().getHeight());
             });
         });
     }

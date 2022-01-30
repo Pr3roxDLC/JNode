@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class GuiUtil {
 
-    public static int getSubScriptHeight(SubScript script){
+    public static int getSubScriptHeight(SubScript script) {
         AtomicInteger height = new AtomicInteger();
         script.getBlocks().forEach(block -> {
             height.addAndGet(getBlockHeight(block));
@@ -17,20 +17,21 @@ public class GuiUtil {
     }
 
     //Yesss, more recursive brain fuckery
-    public static int getBlockHeight(Block block){
-        AtomicInteger height  = new AtomicInteger();
-        if(block instanceof ControlBlock){
+    public static int getBlockHeight(Block block) {
+        AtomicInteger height = new AtomicInteger();
+        if (block instanceof ControlBlock) {
+            height.addAndGet(block.getHeight());
             ((ControlBlock) block).getChildren().forEach(child -> {
-               height.addAndGet(getBlockHeight(child));
+                height.addAndGet(getBlockHeight(child));
             });
             height.addAndGet(10);
-        }else{
+        } else {
             height.addAndGet(block.getHeight());
         }
         return height.get();
     }
 
-    public static int getSubScriptWidth(SubScript script){
+    public static int getSubScriptWidth(SubScript script) {
         AtomicInteger width = new AtomicInteger();
         script.getBlocks().forEach(block -> {
             int blockWidth = getExtraWidthFromThisBLockAndItsChildren(block) + 200;
@@ -39,9 +40,9 @@ public class GuiUtil {
         return width.get();
     }
 
-    public static int getExtraWidthFromThisBLockAndItsChildren(Block block){
+    public static int getExtraWidthFromThisBLockAndItsChildren(Block block) {
         AtomicInteger i = new AtomicInteger();
-        if(block instanceof ControlBlock){
+        if (block instanceof ControlBlock) {
             i.addAndGet(10);
             ((ControlBlock) block).getChildren().forEach(child -> {
                 i.addAndGet(getExtraWidthFromThisBLockAndItsChildren(child));

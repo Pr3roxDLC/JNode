@@ -42,10 +42,10 @@ public class Main {
                 new ReturnSubroutine(program)
         });
 
+        //BYTECODE IO TEST
         program.runProgram();
-
         Exporter.exportProgram(program, "test");
-
+        Importer.importProgramFromFile("test").runProgram();
         Exporter.exportProgram(Importer.importProgramFromFile("test"), "test2");
 
         //=============================BYTE-CODE-TEST-END=====================================
