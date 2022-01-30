@@ -65,6 +65,7 @@ public class SubScript {
                   //If we clicked on the Top Block, dont split the script
                   if(block == getBlocks().get(0)){
                       this.isBound = true;
+                      return;
                   }
 
                   ArrayList<Block> blocksBelow = new ArrayList<>(GuiUtil.getBlocksBelowBlock(block, this));
