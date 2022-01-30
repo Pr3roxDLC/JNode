@@ -18,41 +18,32 @@ public class Exporter {
             if (instruction instanceof AssignConstant) {
                 AssignConstant assignConstant = (AssignConstant) instruction;
                 output.append(assignConstant.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(assignConstant.var.getName()).append(" , ").append(assignConstant.constant).append(" ]");
-            }
-            if (instruction instanceof Calculate) {
+            } else if (instruction instanceof Calculate) {
                 Calculate calculate = (Calculate) instruction;
                 output.append(calculate.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(calculate.out.getName()).append(" , ").append(calculate.in1.getName()).append(" , ").append(calculate.in2.getName()).append(" , ").append(calculate.operation.name()).append(" ]");
-            }
-            if (instruction instanceof CallSubroutine) {
+            } else if (instruction instanceof CallSubroutine) {
                 CallSubroutine callSubroutine = (CallSubroutine) instruction;
                 output.append(callSubroutine.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(callSubroutine.subroutineAddress).append("]");
-            }
-            if (instruction instanceof Compare) {
+            } else if (instruction instanceof Compare) {
                 Compare compare = (Compare) instruction;
                 output.append(compare.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(compare.out.getName()).append(" , ").append(compare.in1.getName()).append(" , ").append(compare.in2.getName()).append(" , ").append(compare.operation.name()).append("]");
-            }
-            if (instruction instanceof CompareJumpIfNotEqual) {
+            } else if (instruction instanceof CompareJumpIfNotEqual) {
                 CompareJumpIfNotEqual compareJumpIfNotEqual = (CompareJumpIfNotEqual) instruction;
                 output.append(compareJumpIfNotEqual.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(compareJumpIfNotEqual.in1.getName()).append(" , ").append(compareJumpIfNotEqual.in2).append(" , ").append(compareJumpIfNotEqual.pointer).append("]");
-            }
-            if (instruction instanceof CompareJumpIfNotZero) {
+            } else if (instruction instanceof CompareJumpIfNotZero) {
                 CompareJumpIfNotZero compareJumpIfNotZero = (CompareJumpIfNotZero) instruction;
                 output.append(compareJumpIfNotZero.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(compareJumpIfNotZero.in.getName()).append(" , ").append(compareJumpIfNotZero.in).append("]");
-            }
-            if (instruction instanceof Exit) {
+            } else if (instruction instanceof Exit) {
                 Exit exit = (Exit) instruction;
                 containsExitInstruction = true;
                 output.append(exit.getClass().getSimpleName().toUpperCase(Locale.ROOT));
-            }
-            if(instruction instanceof SOUT){
+            } else if (instruction instanceof SOUT) {
                 SOUT SOUT = (SOUT) instruction;
                 output.append(SOUT.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(SOUT.output.getName()).append("]");
-            }
-            if(instruction instanceof Jump){
+            } else if (instruction instanceof Jump) {
                 Jump jump = (Jump) instruction;
                 output.append(jump.getClass().getSimpleName().toUpperCase(Locale.ROOT)).append("[").append(jump.pointer).append("]");
-            }
-            if(instruction instanceof ReturnSubroutine){
+            } else if (instruction instanceof ReturnSubroutine) {
                 ReturnSubroutine returnSubroutine = (ReturnSubroutine) instruction;
                 output.append(returnSubroutine.getClass().getSimpleName().toUpperCase(Locale.ROOT));
             }
