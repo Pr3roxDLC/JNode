@@ -1,9 +1,15 @@
 package me.pr3.JNode.GUI.Util;
 
+import jdk.internal.util.xml.impl.Pair;
 import me.pr3.JNode.GUI.SubScript;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 
+import java.awt.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GuiUtil {
@@ -50,5 +56,24 @@ public class GuiUtil {
         }
         return i.get();
     }
+
+
+    public static Collection<Map.Entry<Block,Rectangle>> getBoundingBoxes(SubScript script) {
+        ArrayList<Map.Entry<Block,Rectangle>> boundingBoxes = new ArrayList<>();
+        script.getBlocks().forEach(n -> boundingBoxes.addAll(getBoundingBoxesRecursively(n)));
+        return boundingBoxes;
+    }
+
+    public static Collection<Map.Entry<Block, Rectangle>> getBoundingBoxesRecursively(Block block) {
+        ArrayList<Map.Entry<Block, Rectangle>> boundingBoxes = new ArrayList<>();
+        if (block instanceof ControlBlock) {
+            boundingBoxes.add(new AbstractMap.SimpleEntry<>(block, block.getBoundingBox()));
+            ((ControlBlock) block).getChildren().forEach(n -> boundingBoxes.addAll(getBoundingBoxesRecursively(n)));
+        } else {
+            boundingBoxes.add(new AbstractMap.SimpleEntry<>(block, block.getBoundingBox()));
+        }
+        return boundingBoxes;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package me.pr3.JNode.GUI;
 
+import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 
@@ -43,9 +44,12 @@ public class Script {
             n.getBlocks().forEach(block -> {
                 drawBlock2(block, g, n.getX(), n.getY(), extraWidth.get());
                 g.setColor(Color.BLACK);
-                //DEBUG Draw Collision Box
-                g.drawRect(n.getX(), n.getY(), (int) n.getBoundingBox().getWidth(), (int) n.getBoundingBox().getHeight());
             });
+
+            GuiUtil.getBoundingBoxes(n).forEach(box -> {
+                g.drawRect(box.getValue().x, box.getValue().y, box.getValue().width, box.getValue().height);
+            });
+
         });
     }
 
@@ -54,6 +58,7 @@ public class Script {
         if(block instanceof ControlBlock){
             g.setColor(block.getColor());
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
             //Increase the yOffset For the Header of the Control Block
             yOffset += block.getHeight();
 
@@ -76,6 +81,7 @@ public class Script {
             yOffset += 10;
         }else{
             g.setColor(block.getColor());
+            block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
             yOffset += block.getHeight();
         }

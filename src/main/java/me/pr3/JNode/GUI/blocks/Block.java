@@ -8,7 +8,24 @@ public abstract class Block {
     private int width, height = 50;
     private int layer = 0;
     private Color color = Color.CYAN;
+    private int x,y = 0;
+    private Rectangle boundingBox = null;
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public int getWidth() {
         return width;
@@ -49,4 +66,11 @@ public abstract class Block {
     }
 
 
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+
+    public void setBoundingBox(Rectangle boundingBox) {
+        this.boundingBox = boundingBox;
+    }
 }
