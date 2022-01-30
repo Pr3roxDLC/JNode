@@ -1,9 +1,9 @@
 package me.pr3.JNode.GUI;
 
-import com.sun.istack.internal.Nullable;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
