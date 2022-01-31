@@ -147,7 +147,11 @@ public class GUI extends JPanel implements Runnable {
     }
 
     private void onUpdate() {
-        paint(frame.getGraphics());
+        try {
+            paint(frame.getGraphics());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void onLoad() {
