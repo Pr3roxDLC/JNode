@@ -1,7 +1,5 @@
 package me.pr3.JNode.GUI.Util;
 
-import jdk.internal.util.xml.impl.Pair;
-import me.pr3.JNode.GUI.Script;
 import me.pr3.JNode.GUI.SubScript;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
@@ -15,6 +13,56 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class GuiUtil {
+
+
+    public static void mergeScripts(SubScript thisScript, SubScript intoThatScript, Block belowBlock) {
+        //1. Get the Block that belowBlock is a parent to in intoThatScript
+        //TODO add top level checks
+        if(intoThatScript.getBlocks().contains(belowBlock)){
+            int belowBlockIndex = intoThatScript.getBlocks().indexOf(belowBlock);
+            for(Block block : thisScript.getBlocks()){
+                intoThatScript.getBlocks().add(belowBlockIndex, block);
+                belowBlockIndex++;
+            }
+            thisScript.setToDispose(true);
+            return;
+        }
+
+        ControlBlock parent = getParentOfBlockInScript(belowBlock, intoThatScript);
+        if(parent != null) {
+            int belowBlockIndex = parent.getChildren().indexOf(belowBlock);
+            for(Block block : thisScript.getBlocks()){
+                parent.getChildren().add(belowBlockIndex, block);
+                //belowBlockIndex++;
+            }
+        }
+        thisScript.setToDispose(true);
+        //Add all of thisScripts blocks between belowBlock and the following block ( if existing)
+    }
+
+
+    private static ControlBlock getParentOfBlockInScript(Block child, SubScript script) {
+        for (Block block : script.getBlocks()) {
+            if (block == child) {
+                //child is a Top Level Block => has no parent, return null
+                return null;
+            }
+        }
+        for (Block block : script.getBlocks()) {
+            return (ControlBlock) getParentOfBlockInScriptRecursively(block, child);
+        }
+        throw new Error("Unable to locate a block in SubScript");
+    }
+
+    private static Block getParentOfBlockInScriptRecursively(Block block, Block child) {
+        if (block instanceof ControlBlock) {
+            if(((ControlBlock) block).getChildren().contains(child))return block;
+            for (Block block1 : ((ControlBlock) block).getChildren()) {
+                return getParentOfBlockInScriptRecursively(block1, child);
+            }
+        }
+        return null;
+    }
 
     public static int getSubScriptHeight(SubScript script) {
         AtomicInteger height = new AtomicInteger();

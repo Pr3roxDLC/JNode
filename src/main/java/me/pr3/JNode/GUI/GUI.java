@@ -148,6 +148,7 @@ public class GUI extends JPanel implements Runnable {
 
     private void onUpdate() {
         try {
+            script.subScripts.forEach(n -> {if(n.isToDispose()){script.subScripts.remove(n);}});
             paint(frame.getGraphics());
         }catch (Exception e){
             e.printStackTrace();

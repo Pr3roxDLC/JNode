@@ -15,12 +15,13 @@ import java.util.Optional;
 public class SubScript {
 
     private final ArrayList<Block> blocks = new ArrayList<>();
-    private int x,y,layer = 0;
+    private int x, y, layer = 0;
     private int width, height = 0;
     private boolean isBound = false;
     private int grabOffsetX = 0;
     private int grabOffsetY = 0;
     private Rectangle boundingBox = null;
+    private boolean toDispose = false;
 
     private boolean isBoundingBoxOutdated = true;
 
@@ -52,59 +53,76 @@ public class SubScript {
         this.layer = layer;
     }
 
-    public SubScript(){
+    public SubScript() {
         isBoundingBoxOutdated = true;
     }
 
-    public void handleMouseEvent(MouseEvent event, @Nullable EventType eventType){
+    public void handleMouseEvent(MouseEvent event, @Nullable EventType eventType) {
         this.isBoundingBoxOutdated = true;
-        if(eventType == null)return;
+        if (eventType == null) return;
         //System.out.println(eventType.toString());
-        if(eventType == EventType.PRESSED){
-            if(getBoundingBox().contains(event.getPoint())){
+        if (eventType == EventType.PRESSED) {
+            if (getBoundingBox().contains(event.getPoint())) {
 
 
-              Optional<Map.Entry<Block, Rectangle>> clickedOn =  GuiUtil.getBoundingBoxes(this).stream()
+                Optional<Map.Entry<Block, Rectangle>> clickedOn = GuiUtil.getBoundingBoxes(this).stream()
                     .filter(n -> n.getValue().contains(event.getPoint()))
                     .findFirst();
-              clickedOn.ifPresent(n -> {
-                  Block block = clickedOn.get().getKey();
+                clickedOn.ifPresent(n -> {
+                    Block block = clickedOn.get().getKey();
 
-                  //If we clicked on the Top Block, dont split the script
-                  if(block == getBlocks().get(0)){
-                      System.out.println("Binding Script: " + event.getX() + " - " + block.getX() + " = " + (event.getX() - block.getX()));
-                      System.out.println("Binding Script: " + event.getY() + " - " + block.getY() + " = " + (event.getY() - block.getY()));
-                      this.setGrabOffsetX(event.getX() - block.getX());
-                      this.setGrabOffsetY(event.getY() - block.getY());
-                      this.isBound = true;
-                      return;
-                  }
+                    //If we clicked on the Top Block, dont split the script
+                    if (block == getBlocks().get(0)) {
+                        System.out.println("Binding Script: " + event.getX() + " - " + block.getX() + " = " + (event.getX() - block.getX()));
+                        System.out.println("Binding Script: " + event.getY() + " - " + block.getY() + " = " + (event.getY() - block.getY()));
+                        this.setGrabOffsetX(event.getX() - block.getX());
+                        this.setGrabOffsetY(event.getY() - block.getY());
+                        this.isBound = true;
+                        return;
+                    }
 
-                  ArrayList<Block> blocksBelow = new ArrayList<>(GuiUtil.getBlocksBelowBlock(block, this));
-                  SubScript newSubScript = new SubScript();
-                  newSubScript.getBlocks().addAll(blocksBelow);
-                  newSubScript.setX(0);
-                  newSubScript.setY(0);
-                  GUI.script.subScripts.add(newSubScript);
-                  newSubScript.setGrabOffsetX(event.getX() - block.getX());
-                  newSubScript.setGrabOffsetY(event.getY() - block.getY());
-                  newSubScript.isBound = true;
-                  System.out.println(block.getClass().getSimpleName());
-                  GuiUtil.deleteBlocksFromScript(blocksBelow, this);
-              });
+                    ArrayList<Block> blocksBelow = new ArrayList<>(GuiUtil.getBlocksBelowBlock(block, this));
+                    SubScript newSubScript = new SubScript();
+                    newSubScript.getBlocks().addAll(blocksBelow);
+                    newSubScript.setX(0);
+                    newSubScript.setY(0);
+                    GUI.script.subScripts.add(newSubScript);
+                    newSubScript.setGrabOffsetX(event.getX() - block.getX());
+                    newSubScript.setGrabOffsetY(event.getY() - block.getY());
+                    newSubScript.isBound = true;
+                    System.out.println(block.getClass().getSimpleName());
+                    GuiUtil.deleteBlocksFromScript(blocksBelow, this);
+                });
 
 
                 //System.out.println("Bound to script");
             }
         }
-        if(eventType == EventType.RELEASED){
-            isBound = false;
+        if (eventType == EventType.RELEASED) {
+            if (this.isBound) {
+                isBound = false;
+                for (SubScript script : GUI.script.subScripts) {
+                    if (script == this) continue;
+                    if (script.getBoundingBox().intersects(this.getBoundingBox())) {
+                        Point intersectPoint = new Point((int) this.getBoundingBox().getCenterX(), (int) (this.getBoundingBox().getY()));
+                        for(Map.Entry<Block, Rectangle> pair : GuiUtil.getBoundingBoxes(script)){
+                            if(pair.getValue().contains(intersectPoint)){
+                                GuiUtil.mergeScripts(this, script, pair.getKey());
+                                this.setToDispose(true);
+                                script.isBoundingBoxOutdated = true;
+                                script.getBoundingBox();
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
         this.isBoundingBoxOutdated = true;
     }
 
-    public Rectangle2D getBoundingBox(){
-        if(isBoundingBoxOutdated){
+    public Rectangle2D getBoundingBox() {
+        if (isBoundingBoxOutdated) {
             height = GuiUtil.getSubScriptHeight(this);
             width = GuiUtil.getSubScriptWidth(this);
             //System.out.println("Calculated " + height + " " + width);
@@ -134,7 +152,15 @@ public class SubScript {
         this.grabOffsetX = grabOffsetX;
     }
 
-    public enum EventType{
+    public boolean isToDispose() {
+        return toDispose;
+    }
+
+    public void setToDispose(boolean toDispose) {
+        this.toDispose = toDispose;
+    }
+
+    public enum EventType {
         PRESSED,
         CLICKED,
         RELEASED
