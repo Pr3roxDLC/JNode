@@ -77,6 +77,10 @@ public class Script {
             int oldXOffset = xOffset;
 
             xOffset += 10;
+            //Temporary Solution
+            if(((ControlBlock) block).getChildren().isEmpty()){
+                yOffset += block.getHeight();
+            }
             ((ControlBlock) block).getChildren().forEach(child -> {
                 drawBlock2(child, g, x, y, extraWidth);
             });
