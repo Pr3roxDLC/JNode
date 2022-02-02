@@ -49,7 +49,8 @@ public class GuiUtil {
             }
         }
         for (Block block : script.getBlocks()) {
-            return (ControlBlock) getParentOfBlockInScriptRecursively(block, child);
+            ControlBlock returnBlock = (ControlBlock) getParentOfBlockInScriptRecursively(block, child);
+            if(returnBlock != null)return returnBlock;
         }
         throw new Error("Unable to locate a block in SubScript");
     }
@@ -58,7 +59,8 @@ public class GuiUtil {
         if (block instanceof ControlBlock) {
             if(((ControlBlock) block).getChildren().contains(child))return block;
             for (Block block1 : ((ControlBlock) block).getChildren()) {
-                return getParentOfBlockInScriptRecursively(block1, child);
+                Block returnBlock = getParentOfBlockInScriptRecursively(block1, child);
+                if(returnBlock!=null)return returnBlock;
             }
         }
         return null;
