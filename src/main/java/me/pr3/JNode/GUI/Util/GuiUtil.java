@@ -19,7 +19,7 @@ public class GuiUtil {
         //1. Get the Block that belowBlock is a parent to in intoThatScript
         //TODO add top level checks
         if(intoThatScript.getBlocks().contains(belowBlock)){
-            int belowBlockIndex = intoThatScript.getBlocks().indexOf(belowBlock);
+            int belowBlockIndex = intoThatScript.getBlocks().indexOf(belowBlock) + 1;
             for(Block block : thisScript.getBlocks()){
                 intoThatScript.getBlocks().add(belowBlockIndex, block);
                 belowBlockIndex++;
@@ -30,10 +30,10 @@ public class GuiUtil {
 
         ControlBlock parent = getParentOfBlockInScript(belowBlock, intoThatScript);
         if(parent != null) {
-            int belowBlockIndex = parent.getChildren().indexOf(belowBlock);
+            int belowBlockIndex = parent.getChildren().indexOf(belowBlock) + 1;
             for(Block block : thisScript.getBlocks()){
                 parent.getChildren().add(belowBlockIndex, block);
-                //belowBlockIndex++;
+                belowBlockIndex++;
             }
         }
         thisScript.setToDispose(true);
