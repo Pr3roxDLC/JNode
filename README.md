@@ -1,3 +1,3 @@
 # JNode
 
-A block programming implementation in java
+A visual block programming implementation in java
