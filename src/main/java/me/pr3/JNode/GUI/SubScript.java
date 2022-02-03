@@ -106,7 +106,26 @@ public class SubScript {
                     if (script.getBoundingBox().intersects(this.getBoundingBox())) {
                         Point intersectPoint = new Point((int) this.getBoundingBox().getCenterX(), (int) (this.getBoundingBox().getY()));
                         for(Map.Entry<Block, Rectangle> pair : GuiUtil.getBoundingBoxes(script)){
-                            if(pair.getValue().contains(intersectPoint)){
+                            if(pair.getKey() instanceof ControlBlock){
+                                GuiUtil.getSubBoundingBoxes(pair.getKey()).entrySet().stream().filter(stringRectangleEntry -> stringRectangleEntry.getValue().contains(intersectPoint)).findFirst().ifPresent(n -> {
+                                    String name = n.getKey();
+                                    Rectangle rect = n.getValue();
+                                    switch (name){
+                                        case"Head":
+                                            GuiUtil.mergeScripts(this, script, pair.getKey(), 0);
+                                            this.setToDispose(true);
+                                            script.isBoundingBoxOutdated = true;
+                                            script.getBoundingBox();
+                                            break;
+                                        case "Foot":
+                                            GuiUtil.mergeScripts(this, script, pair.getKey());
+                                            this.setToDispose(true);
+                                            script.isBoundingBoxOutdated = true;
+                                            script.getBoundingBox();
+                                            break;
+                                    }
+                                });
+                            }else if(pair.getValue().contains(intersectPoint)){
                                 GuiUtil.mergeScripts(this, script, pair.getKey());
                                 this.setToDispose(true);
                                 script.isBoundingBoxOutdated = true;

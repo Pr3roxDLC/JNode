@@ -5,16 +5,37 @@ import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 
 import java.awt.*;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class GuiUtil {
 
 
+
+    //Returns a Map of <Name,Boundingbox> for a given block, this is used for Control Blocks, giving it a non control block will simply return the blocks
+    //bounding box as <"Main",boundingbox>
+    public static HashMap<String,Rectangle> getSubBoundingBoxes(Block block){
+        if(!(block instanceof ControlBlock)){
+            HashMap<String, Rectangle> map = new HashMap<>();
+            map.put("Main",block.getBoundingBox());
+            return map;
+        }else{
+            //Only works for If and While Loop block atm, might have to be adjusted further later
+            HashMap<String, Rectangle> map = new HashMap<>();
+            map.put("Head", block.getBoundingBox());
+            map.put("Foot", new Rectangle(block.getX(), block.getY() + GuiUtil.getBlockHeight(block) - 10,block.getWidth() + block.getExtraWidth(), 10));
+            return map;
+        }
+    }
+
+    public static void mergeScripts(SubScript thisScript, SubScript intoThatScript, Block parent, int withIndex){
+        if(parent instanceof ControlBlock){
+            ((ControlBlock) parent).getChildren().addAll(withIndex, thisScript.getBlocks());
+        }
+    }
+
+    //TODO Simplify this, there is no need to get the block from the script if we already have the block, we can just add the blocks as the children of the parent
     public static void mergeScripts(SubScript thisScript, SubScript intoThatScript, Block belowBlock) {
         //1. Get the Block that belowBlock is a parent to in intoThatScript
         //TODO add top level checks

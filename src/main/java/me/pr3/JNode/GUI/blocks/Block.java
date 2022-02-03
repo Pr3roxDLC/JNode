@@ -10,6 +10,7 @@ public abstract class Block {
     private Color color = Color.CYAN;
     private int x,y = 0;
     private Rectangle boundingBox = null;
+    private int extraWidth = 0;
 
     public int getX() {
         return x;
@@ -72,5 +73,13 @@ public abstract class Block {
 
     public void setBoundingBox(Rectangle boundingBox) {
         this.boundingBox = boundingBox;
+    }
+
+    public int getExtraWidth() {
+        return extraWidth;
+    }
+
+    public void setExtraWidth(int extraWidth) {
+        this.extraWidth = extraWidth;
     }
 }

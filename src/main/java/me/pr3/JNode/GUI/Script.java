@@ -64,9 +64,10 @@ public class Script {
 
 
     private void drawBlock2(Block block, Graphics2D g, int x, int y, int extraWidth) {
+        block.setX(x + xOffset);
+        block.setY(y + yOffset);
+        block.setExtraWidth(extraWidth - xOffset);
         if (block instanceof ControlBlock) {
-            block.setX(x + xOffset);
-            block.setY(y + yOffset);
             g.setColor(block.getColor());
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
             block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
@@ -77,10 +78,6 @@ public class Script {
             int oldXOffset = xOffset;
 
             xOffset += 10;
-            //Temporary Solution
-            if(((ControlBlock) block).getChildren().isEmpty()){
-                yOffset += block.getHeight();
-            }
             ((ControlBlock) block).getChildren().forEach(child -> {
                 drawBlock2(child, g, x, y, extraWidth);
             });
@@ -95,13 +92,15 @@ public class Script {
             //Increase the yOffset for the footer of the Control Block
             yOffset += 10;
         } else {
-            block.setX(x + xOffset);
-            block.setY(y + yOffset);
             g.setColor(block.getColor());
             block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
             yOffset += block.getHeight();
         }
+        g.setColor(Color.RED);
+        GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> {
+            g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        });
     }
 
 
