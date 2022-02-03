@@ -3,6 +3,13 @@ package me.pr3.JNode.GUI.Util;
 import me.pr3.JNode.GUI.SubScript;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
+import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
+import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
+import me.pr3.JNode.GUI.blocks.ExpressionBlocks.BooleanCalculationBlock;
+import me.pr3.JNode.GUI.blocks.ExpressionBlocks.CalculationBlock;
+import me.pr3.JNode.GUI.blocks.HeadBlocks.MethodCalledBlock;
+import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
+import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import java.awt.*;
 import java.util.*;
@@ -11,7 +18,25 @@ import java.util.stream.Collectors;
 
 public class GuiUtil {
 
-
+    public static Block getNewBlockByType(Class clazz){
+       if(clazz == IfBlock.class){
+           return new IfBlock(0, new ArrayList<>());
+       }else if(clazz == WhileLoop.class){
+           return new WhileLoop(0, new ArrayList<>());
+       }else if(clazz == BooleanCalculationBlock.class){
+           return new BooleanCalculationBlock(0);
+       }else if(clazz == CalculationBlock.class){
+           return new CalculationBlock(0);
+       }else if(clazz == MethodCalledBlock.class){
+           return new MethodCalledBlock(0);
+       }else if(clazz == OnEventBlock.class){
+           return new OnEventBlock(0);
+       }else if(clazz == SetVarBlock.class){
+           return new SetVarBlock(0);
+       }else{
+           throw new Error("Unable to create new Instance of Block of Type: " + clazz.getSimpleName());
+       }
+    }
 
     //Returns a Map of <Name,Boundingbox> for a given block, this is used for Control Blocks, giving it a non control block will simply return the blocks
     //bounding box as <"Main",boundingbox>

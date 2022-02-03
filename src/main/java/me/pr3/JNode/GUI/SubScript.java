@@ -1,5 +1,6 @@
 package me.pr3.JNode.GUI;
 
+import me.pr3.JNode.GUI.Util.EventType;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
@@ -17,6 +18,11 @@ public class SubScript {
     private final ArrayList<Block> blocks = new ArrayList<>();
     private int x, y, layer = 0;
     private int width, height = 0;
+
+    public void setBound(boolean bound) {
+        isBound = bound;
+    }
+
     private boolean isBound = false;
     private int grabOffsetX = 0;
     private int grabOffsetY = 0;
@@ -179,11 +185,6 @@ public class SubScript {
         this.toDispose = toDispose;
     }
 
-    public enum EventType {
-        PRESSED,
-        CLICKED,
-        RELEASED
-    }
 
 
 }

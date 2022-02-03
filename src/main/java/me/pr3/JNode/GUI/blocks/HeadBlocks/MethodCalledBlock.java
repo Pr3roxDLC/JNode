@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class MethodCalledBlock extends Block {
 
-    public MethodCalledBlock( int width, int height, Color color, int layer) {
-        super( color, layer);
+    public MethodCalledBlock(int layer) {
+        super( Color.CYAN.darker(), layer);
         setText("OnScriptCall");
     }
 

@@ -1,6 +1,9 @@
 package me.pr3.JNode.GUI;
 
 
+import me.pr3.JNode.GUI.Util.EventType;
+import me.pr3.JNode.GUI.blocks.Block;
+import me.pr3.JNode.GUI.blocks.BlockSelector;
 import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
@@ -28,8 +31,8 @@ public class GUI extends JPanel implements Runnable {
     public static JFrame frame;
     Image dbImage = null;
     Graphics dbg = null;
-    int width = 1920;
-    int height = 1080;
+    public static int width = 1920;
+    public static int height = 1080;
 
 
     //FileIO
@@ -51,17 +54,22 @@ public class GUI extends JPanel implements Runnable {
         frame.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.CLICKED));
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, EventType.CLICKED));
+                BlockSelector.handleMouseEvent(mouseEvent, EventType.CLICKED);
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.PRESSED));
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, EventType.PRESSED));
+                BlockSelector.handleMouseEvent(mouseEvent, EventType.PRESSED);
+
             }
 
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
-                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, SubScript.EventType.RELEASED));
+                script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, EventType.RELEASED));
+                BlockSelector.handleMouseEvent(mouseEvent, EventType.RELEASED);
+
             }
 
             @Override
@@ -139,9 +147,10 @@ public class GUI extends JPanel implements Runnable {
             dbg = dbImage.getGraphics();
 
         }
-        dbg.setColor(Color.WHITE);
+        dbg.setColor(Color.LIGHT_GRAY);
         dbg.fillRect(0, 0 , 1920, 1080);
 
+        BlockSelector.draw((Graphics2D) dbg);
         script.drawScriptBlocks((Graphics2D) dbg);
 
         g.drawImage(dbImage, 0, 0, null);
@@ -159,6 +168,8 @@ public class GUI extends JPanel implements Runnable {
     private void onLoad() {
         script = new Script(new ArrayList<>());
         SubScript subScript = new SubScript();
+        subScript.setX(500);
+        subScript.setY(50);
         subScript.getBlocks().add(new OnEventBlock(0));
         subScript.getBlocks().add(new WhileLoop(0, new ArrayList<>(Arrays.asList(new SetVarBlock(0),
                 new IfBlock(0, new ArrayList<>(Collections.singletonList(new SetVarBlock(0))))))));
