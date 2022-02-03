@@ -12,6 +12,16 @@ public abstract class Block {
     private Rectangle boundingBox = null;
     private int extraWidth = 0;
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    private String text = "Error";
+
     public int getX() {
         return x;
     }

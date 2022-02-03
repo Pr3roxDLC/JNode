@@ -18,6 +18,7 @@ public class SetVarBlock extends Block {
 
     public SetVarBlock(int layer) {
         super(Color.LIGHT_GRAY, layer);
+        setText("Set Variable");
         setHeight(50);
         setWidth(200);
     }

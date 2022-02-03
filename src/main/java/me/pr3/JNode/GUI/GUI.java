@@ -23,6 +23,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class GUI extends JPanel implements Runnable {
     //Internal Varialbles
     boolean shouldClose = false;
+    public static boolean DEBUG = true;
     //GUI Parent
     public static JFrame frame;
     Image dbImage = null;

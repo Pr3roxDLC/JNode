@@ -1,6 +1,7 @@
 package me.pr3.JNode.GUI;
 
 import me.pr3.JNode.GUI.Util.GuiUtil;
+import me.pr3.JNode.GUI.Util.RenderUtil;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
 
@@ -55,11 +56,13 @@ public class Script {
 
         });
         g.setColor(Color.RED);
-        subScripts.forEach(n -> {
-            n.getBoundingBox();
-            g.fillRect(n.getX(), n.getY(), 10, 10);
-            g.drawRect((int) n.getBoundingBox().getX(), (int) n.getBoundingBox().getY(), (int) n.getBoundingBox().getWidth(), (int) n.getBoundingBox().getHeight());
-        });
+        if(GUI.DEBUG) {
+            subScripts.forEach(n -> {
+                n.getBoundingBox();
+                g.fillRect(n.getX(), n.getY(), 10, 10);
+                g.drawRect((int) n.getBoundingBox().getX(), (int) n.getBoundingBox().getY(), (int) n.getBoundingBox().getWidth(), (int) n.getBoundingBox().getHeight());
+            });
+        }
     }
 
 
@@ -70,6 +73,8 @@ public class Script {
         if (block instanceof ControlBlock) {
             g.setColor(block.getColor());
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            g.setColor(Color.BLACK);
+            g.drawString(block.getText(), block.getX() + 10, (int) ((block.getY() + block.getHeight()/2) + g.getFont().getStringBounds(block.getText(), g.getFontRenderContext()).getHeight() / 2));
             block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
             //Increase the yOffset For the Header of the Control Block
             yOffset += block.getHeight();
@@ -95,12 +100,16 @@ public class Script {
             g.setColor(block.getColor());
             block.setBoundingBox(new Rectangle(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight()));
             g.fillRect(x + xOffset, y + yOffset, block.getWidth() + extraWidth - xOffset, block.getHeight());
+            g.setColor(Color.BLACK);
+            g.drawString(block.getText(), block.getX() + 10, (int) ((block.getY() + block.getHeight()/2) + g.getFont().getStringBounds(block.getText(), g.getFontRenderContext()).getHeight() / 2));
             yOffset += block.getHeight();
         }
-        g.setColor(Color.RED);
-        GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> {
-            g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-        });
+        if(GUI.DEBUG) {
+            g.setColor(Color.RED);
+            GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> {
+                g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+            });
+        }
     }
 
 
