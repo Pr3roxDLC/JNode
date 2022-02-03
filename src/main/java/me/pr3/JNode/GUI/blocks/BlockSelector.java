@@ -67,6 +67,7 @@ public class BlockSelector {
         }
     }
 
+    //TODO RELEASE TO DELETE, ADD grabOffset LOGIC
     public static void handleMouseEvent(MouseEvent mouseEvent, EventType eventType) {
         if (eventType == EventType.PRESSED) {
             if (selectorBoundingBox.contains(mouseEvent.getPoint())) {
