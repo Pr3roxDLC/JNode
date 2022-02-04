@@ -4,6 +4,7 @@ import me.pr3.JNode.GUI.Util.EventType;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.ControlBlock;
+import me.pr3.JNode.GUI.blocks.HeadBlocks.HeadBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -107,6 +108,7 @@ public class SubScript {
         if (eventType == EventType.RELEASED) {
             if (this.isBound) {
                 isBound = false;
+                if(this.getBlocks().get(0) instanceof HeadBlock)return;
                 for (SubScript script : GUI.script.subScripts) {
                     if (script == this) continue;
                     if (script.getBoundingBox().intersects(this.getBoundingBox())) {
