@@ -15,12 +15,14 @@ import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BlockSelector {
 
     public static Rectangle selectorBoundingBox = new Rectangle(0, 0, 400, GUI.height);
+    public static int scrollAmmount = 0;
 
     public static ArrayList<Block> blockSelection = new ArrayList<>(Arrays.asList(
         new IfBlock(0, new ArrayList<>()),
@@ -35,7 +37,7 @@ public class BlockSelector {
     public static void draw(Graphics2D g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 400, GUI.height);
-        int x = 50, y = 0;
+        int x = 50, y = scrollAmmount;
         for (Block block : blockSelection) {
             block.setX(x);
             block.setY(y);
@@ -81,6 +83,10 @@ public class BlockSelector {
         } else if (eventType == EventType.RELEASED) {
 
         }
+    }
+
+    public static void handleMouseScrollEvent(MouseWheelEvent mouseWheelEvent){
+       scrollAmmount += mouseWheelEvent.getUnitsToScroll();
     }
 
 }

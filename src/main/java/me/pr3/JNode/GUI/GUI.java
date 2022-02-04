@@ -2,6 +2,7 @@ package me.pr3.JNode.GUI;
 
 
 import me.pr3.JNode.GUI.Util.EventType;
+import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.BlockSelector;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
@@ -10,10 +11,7 @@ import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -79,6 +77,13 @@ public class GUI extends JPanel implements Runnable {
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
                 script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, null));
+            }
+        });
+
+        frame.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
+                BlockSelector.handleMouseScrollEvent(mouseWheelEvent);
             }
         });
 
