@@ -1,10 +1,9 @@
-package me.pr3.JNode.GUI.blocks.ControlBloks;
+package me.pr3.JNode.GUI.blocks.ControlBlocks;
 
 import me.pr3.JNode.GUI.blocks.Block;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 

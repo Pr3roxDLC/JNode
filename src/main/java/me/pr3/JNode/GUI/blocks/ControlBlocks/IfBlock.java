@@ -1,4 +1,4 @@
-package me.pr3.JNode.GUI.blocks.ControlBloks;
+package me.pr3.JNode.GUI.blocks.ControlBlocks;
 
 import me.pr3.JNode.GUI.blocks.Block;
 

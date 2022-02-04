@@ -3,7 +3,7 @@ package me.pr3.JNode.GUI;
 import me.pr3.JNode.GUI.Util.EventType;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
-import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.ControlBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;

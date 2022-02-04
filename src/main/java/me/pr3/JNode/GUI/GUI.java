@@ -2,10 +2,9 @@ package me.pr3.JNode.GUI;
 
 
 import me.pr3.JNode.GUI.Util.EventType;
-import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.BlockSelector;
-import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
-import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
 import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 

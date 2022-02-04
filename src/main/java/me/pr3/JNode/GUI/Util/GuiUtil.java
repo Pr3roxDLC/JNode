@@ -2,9 +2,9 @@ package me.pr3.JNode.GUI.Util;
 
 import me.pr3.JNode.GUI.SubScript;
 import me.pr3.JNode.GUI.blocks.Block;
-import me.pr3.JNode.GUI.blocks.ControlBloks.ControlBlock;
-import me.pr3.JNode.GUI.blocks.ControlBloks.IfBlock;
-import me.pr3.JNode.GUI.blocks.ControlBloks.WhileLoop;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.ControlBlock;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
+import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
 import me.pr3.JNode.GUI.blocks.ExpressionBlocks.BooleanCalculationBlock;
 import me.pr3.JNode.GUI.blocks.ExpressionBlocks.CalculationBlock;
 import me.pr3.JNode.GUI.blocks.HeadBlocks.MethodCalledBlock;

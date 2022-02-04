@@ -15,7 +15,6 @@ public class AssignConstant extends Instruction {
         //this feels wrong to do
         if(!parent.getVarPool().containsKey(var.getName()))
             parent.getVarPool().put(var.getName(), var);
-
         this.var = var;
     }
 
@@ -31,6 +30,8 @@ public class AssignConstant extends Instruction {
 
     @Override
     public void run() {
+        if(!parent.getVarPool().containsKey(var.getName()))
+            parent.getVarPool().put(var.getName(), var);
         var.setNumber(constant);
     }
 
