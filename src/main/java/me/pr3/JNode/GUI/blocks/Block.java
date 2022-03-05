@@ -11,6 +11,12 @@ public abstract class Block {
     private Rectangle boundingBox = null;
     private int extraWidth = 0;
 
+    public Block(Color color, int layer){
+        this.color = color;
+        this.layer = layer;
+        this.width = 200;
+    }
+
     public String getText() {
         return text;
     }
@@ -67,12 +73,6 @@ public abstract class Block {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public Block(Color color, int layer){
-        this.color = color;
-        this.layer = layer;
-        this.width = 200;
     }
 
     public Rectangle getBoundingBox() {

@@ -73,7 +73,7 @@ public class BlockSelector {
             if (selectorBoundingBox.contains(mouseEvent.getPoint())) {
                 blockSelection.stream().filter(n -> n.getBoundingBox().contains(mouseEvent.getPoint())).findFirst().ifPresent(block -> {
                     SubScript newScript = new SubScript();
-                    newScript.getBlocks().add(GuiUtil.getNewBlockByType(block.getClass()));
+                    newScript.getBlocks().add(block);
                     newScript.setBound(true);
                     GUI.script.subScripts.add(newScript);
                 });
@@ -82,7 +82,7 @@ public class BlockSelector {
     }
 
     public static void handleMouseScrollEvent(MouseWheelEvent mouseWheelEvent){
-       scrollAmount += mouseWheelEvent.getUnitsToScroll();
+       scrollAmount += mouseWheelEvent.getUnitsToScroll() * 7.5;
     }
 
 }

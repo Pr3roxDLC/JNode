@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Script {
 
-    public CopyOnWriteArrayList<SubScript> subScripts;
+    public final CopyOnWriteArrayList<SubScript> subScripts;
 
     public Script(Collection<SubScript> subScripts) {
         this.subScripts = new CopyOnWriteArrayList<>(subScripts);
@@ -22,14 +22,13 @@ public class Script {
     public void drawScriptBlocks(Graphics2D g) {
 
         //Iterate over all blocks first to get the max x offset to be expected to adjust the extra width every block will be given
-
         subScripts.forEach(n -> {
             //Important: Always reset the xOffset or collision will get fucked up
             xOffset = 0;
             yOffset = 0;
             AtomicInteger extraWidth = new AtomicInteger();
             n.getBlocks().forEach(block -> {
-                int extraWidthFromThisBlock = getExtraWidthFromThisBLockAndItsChildren(block);
+                int extraWidthFromThisBlock = getExtraWidthFromThisBlockAndItsChildren(block);
                 if (extraWidth.get() <= extraWidthFromThisBlock)
                     extraWidth.set(extraWidthFromThisBlock);
             });
@@ -52,7 +51,6 @@ public class Script {
                 g.drawRect((int) n.getBoundingBox().getX(), (int) n.getBoundingBox().getY(), (int) n.getBoundingBox().getWidth(), (int) n.getBoundingBox().getHeight());
             });
     }
-
 
     private void drawBlock2(Block block, Graphics2D g, int x, int y, int extraWidth) {
         block.setX(x + xOffset);
@@ -96,13 +94,12 @@ public class Script {
         }
     }
 
-
     //Recursive Methods are the shit, not, why is everything recursive in this project I hate it
-    public int getExtraWidthFromThisBLockAndItsChildren(Block block) {
+    public int getExtraWidthFromThisBlockAndItsChildren(Block block) {
         AtomicInteger i = new AtomicInteger();
         if (block instanceof ControlBlock) {
             i.addAndGet(10);
-            ((ControlBlock) block).getChildren().forEach(child -> i.addAndGet(getExtraWidthFromThisBLockAndItsChildren(child)));
+            ((ControlBlock) block).getChildren().forEach(child -> i.addAndGet(getExtraWidthFromThisBlockAndItsChildren(child)));
         }
         return i.get();
     }

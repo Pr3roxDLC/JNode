@@ -19,7 +19,6 @@ public class Exporter {
         }
         if (!containsExitInstruction)
             System.out.println("Exported Program with no Exit instruction");
-
         createFile(output.toString(), name);
     }
 

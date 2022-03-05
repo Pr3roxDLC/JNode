@@ -16,7 +16,7 @@ public abstract class ControlBlock extends Block {
     }
 
     public ControlBlock(Color color, int layer) {
-        super( color, layer);
+        super(color, layer);
     }
 
 }
