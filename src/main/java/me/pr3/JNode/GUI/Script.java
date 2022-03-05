@@ -34,7 +34,7 @@ public class Script {
                     extraWidth.set(extraWidthFromThisBlock);
             });
 
-            if (n.isBound()) {
+            if (n.isBound() && GUI.frame.isFocused() && GUI.frame.getMousePosition() != null) {
                 n.setX(GUI.frame.getMousePosition().x - n.getGrabOffsetX());
                 n.setY(GUI.frame.getMousePosition().y - n.getGrabOffsetY());
             }
