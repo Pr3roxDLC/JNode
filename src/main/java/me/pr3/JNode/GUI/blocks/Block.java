@@ -4,10 +4,9 @@ import java.awt.*;
 
 public abstract class Block {
 
-
     private int width, height = 50;
-    private int layer = 0;
-    private Color color = Color.CYAN;
+    private int layer;
+    private Color color;
     private int x,y = 0;
     private Rectangle boundingBox = null;
     private int extraWidth = 0;
@@ -76,7 +75,6 @@ public abstract class Block {
         this.width = 200;
     }
 
-
     public Rectangle getBoundingBox() {
         return boundingBox;
     }
@@ -92,4 +90,5 @@ public abstract class Block {
     public void setExtraWidth(int extraWidth) {
         this.extraWidth = extraWidth;
     }
+
 }

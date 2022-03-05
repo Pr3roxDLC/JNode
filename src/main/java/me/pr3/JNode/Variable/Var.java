@@ -2,8 +2,8 @@ package me.pr3.JNode.Variable;
 
 public class Var {
 
-    private Number number = null;
-    private String name = "";
+    private Number number;
+    private String name;
 
     public Number getNumber() {
         return number;
@@ -28,7 +28,7 @@ public class Var {
 
     public Var(Number number){
         this.number = number;
-        this.name = "v"+String.valueOf(Integer.toHexString(this.hashCode()));
+        this.name = "v" + Integer.toHexString(this.hashCode());
     }
 
 }

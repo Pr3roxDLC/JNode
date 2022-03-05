@@ -22,7 +22,7 @@ import java.util.Arrays;
 public class BlockSelector {
 
     public static Rectangle selectorBoundingBox = new Rectangle(0, 0, 400, GUI.height);
-    public static int scrollAmmount = 0;
+    public static int scrollAmount = 0;
 
     public static ArrayList<Block> blockSelection = new ArrayList<>(Arrays.asList(
         new IfBlock(0, new ArrayList<>()),
@@ -37,7 +37,7 @@ public class BlockSelector {
     public static void draw(Graphics2D g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 400, GUI.height);
-        int x = 50, y = scrollAmmount;
+        int x = 50, y = scrollAmount;
         for (Block block : blockSelection) {
             block.setX(x);
             block.setY(y);
@@ -61,9 +61,7 @@ public class BlockSelector {
             }
             if (GUI.DEBUG) {
                 g.setColor(Color.RED);
-                GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> {
-                    g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-                });
+                GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
             }
             y += 200;
         }
@@ -80,13 +78,11 @@ public class BlockSelector {
                     GUI.script.subScripts.add(newScript);
                 });
             }
-        } else if (eventType == EventType.RELEASED) {
-
         }
     }
 
     public static void handleMouseScrollEvent(MouseWheelEvent mouseWheelEvent){
-       scrollAmmount += mouseWheelEvent.getUnitsToScroll();
+       scrollAmount += mouseWheelEvent.getUnitsToScroll();
     }
 
 }

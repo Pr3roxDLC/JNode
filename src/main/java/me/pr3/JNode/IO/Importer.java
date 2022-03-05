@@ -22,7 +22,7 @@ public class Importer {
         ArrayList<Instruction> instructionList = new ArrayList<>();
 
         for (String line : lines) {
-            String end = "";
+            String end;
             String[] vars = new String[0];
             if (line.contains("[")) {
                 end = line.split("\\[")[1];
@@ -30,10 +30,9 @@ public class Importer {
                 end = end.replace(" ", "");
                 vars = end.split(",");
             }
-            for(Class inst : Instruction.getAllInstructions()) {
+            for(Class<?> inst : Instruction.getAllInstructions())
                 if(line.startsWith(inst.getSimpleName().toUpperCase(Locale.ROOT)))
                     instructionList.add((Instruction) inst.getDeclaredConstructor(Program.class, String[].class).newInstance(program, vars));
-            }
         }
 
         program.setInstructions(instructionList.toArray(new Instruction[0]));
@@ -41,19 +40,19 @@ public class Importer {
     }
 
     private static String getStringFromFile(String fileName) {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         try {
             File myObj = new File(fileName + ".jn");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine())
-                str += myReader.nextLine() + System.lineSeparator();
+                str.append(myReader.nextLine()).append(System.lineSeparator());
 
             myReader.close();
         } catch (FileNotFoundException e) {
             System.err.println("An error occurred.");
             e.printStackTrace();
         }
-        return str;
+        return str.toString();
     }
 
 }
