@@ -38,7 +38,6 @@ public class GUI extends JPanel implements Runnable {
 
     public static void initGUI() {
         frame = new JFrame("JNode Editor");
-        System.out.println(height);
         frame.setSize(width, height);
         frame.setLayout(null);
         //Initialize All Components
