@@ -3,6 +3,8 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
+import java.util.Locale;
+
 public class AssignConstant extends Instruction {
 
     public Var var = null;
@@ -33,6 +35,11 @@ public class AssignConstant extends Instruction {
         if(!parent.getVarPool().containsKey(var.getName()))
             parent.getVarPool().put(var.getName(), var);
         var.setNumber(constant);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.var.getName() + " , " + this.constant + " ]";
     }
 
 }

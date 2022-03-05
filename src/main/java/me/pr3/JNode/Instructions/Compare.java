@@ -3,6 +3,8 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
+import java.util.Locale;
+
 public class Compare extends Instruction {
 
     public Var out, in1, in2 = null;
@@ -68,6 +70,11 @@ public class Compare extends Instruction {
         GREATER_OR_EQUAL,
         GREATER,
         UNEQUAL
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.out.getName() + (" , ") + this.in1.getName() + (" , ") + this.in2.getName() + (" , ") + this.operation.name() +("]");
     }
 
 }

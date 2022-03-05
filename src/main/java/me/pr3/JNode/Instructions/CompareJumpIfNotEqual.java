@@ -3,6 +3,8 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
+import java.util.Locale;
+
 public class CompareJumpIfNotEqual extends Instruction {
 
     public Var in1, in2 = null;
@@ -26,6 +28,11 @@ public class CompareJumpIfNotEqual extends Instruction {
     public void run() {
         if (in1.getNumber().doubleValue() != in2.getNumber().doubleValue())
             parent.setCounter(pointer - 1);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.in1.getName() + " , " + this.in2 + " , " + this.pointer + "]";
     }
 
 }

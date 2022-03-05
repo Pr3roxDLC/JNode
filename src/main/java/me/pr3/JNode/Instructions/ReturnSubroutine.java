@@ -2,6 +2,8 @@ package me.pr3.JNode.Instructions;
 
 import me.pr3.JNode.Interpreter.Program;
 
+import java.util.Locale;
+
 public class ReturnSubroutine extends Instruction {
 
     public ReturnSubroutine(Program parent) {
@@ -15,6 +17,11 @@ public class ReturnSubroutine extends Instruction {
     @Override
     public void run() {
         parent.setCounter(parent.getReturnStack().pop());
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT);
     }
 
 }

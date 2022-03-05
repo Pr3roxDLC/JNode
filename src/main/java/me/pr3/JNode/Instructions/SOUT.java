@@ -3,6 +3,8 @@ package me.pr3.JNode.Instructions;
 import me.pr3.JNode.Interpreter.Program;
 import me.pr3.JNode.Variable.Var;
 
+import java.util.Locale;
+
 public class SOUT extends Instruction {
 
     public Var output = null;
@@ -20,6 +22,11 @@ public class SOUT extends Instruction {
     @Override
     public void run() {
         System.out.println(output.getNumber().toString());
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.output.getName() + "]";
     }
 
 }
