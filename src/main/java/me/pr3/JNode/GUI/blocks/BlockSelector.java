@@ -16,6 +16,7 @@ import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -73,7 +74,13 @@ public class BlockSelector {
             if (selectorBoundingBox.contains(mouseEvent.getPoint())) {
                 blockSelection.stream().filter(n -> n.getBoundingBox().contains(mouseEvent.getPoint())).findFirst().ifPresent(block -> {
                     SubScript newScript = new SubScript();
-                    newScript.getBlocks().add(block);
+                    try {
+                        if (block.getClass().getConstructors()[0].getGenericParameterTypes().length > 1)
+                            newScript.getBlocks().add((Block) block.getClass().getConstructors()[0].newInstance(0, new ArrayList<>()));
+                        else newScript.getBlocks().add((Block) block.getClass().getConstructors()[0].newInstance(0));
+                    } catch (Exception ignored) {
+                        //Ignored because it won't occur lol
+                    }
                     newScript.setBound(true);
                     GUI.script.subScripts.add(newScript);
                 });
