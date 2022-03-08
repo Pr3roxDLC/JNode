@@ -1,9 +1,7 @@
 package me.pr3.JNode.GUI.blocks;
 
-import me.pr3.JNode.GUI.GUI;
-import me.pr3.JNode.GUI.SubScript;
-import me.pr3.JNode.GUI.Util.EventType;
-import me.pr3.JNode.GUI.Util.GuiUtil;
+import me.pr3.JNode.GUI.*;
+import me.pr3.JNode.GUI.Util.*;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.ControlBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
@@ -14,11 +12,8 @@ import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
 import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.event.*;
+import java.util.*;
 
 public class BlockSelector {
 

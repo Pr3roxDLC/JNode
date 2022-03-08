@@ -1,5 +1,7 @@
 package me.pr3.JNode.GUI;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.pr3.JNode.GUI.Util.EventType;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
@@ -17,7 +19,8 @@ import java.util.Optional;
 public class SubScript {
 
     private final ArrayList<Block> blocks = new ArrayList<>();
-    private int x, y, layer = 0;
+    @Getter @Setter
+    private int x, y, layer = 0, grabOffsetX = 0, grabOffsetY = 0;
     private int width, height = 0;
 
     public void setBound(boolean bound) {
@@ -25,38 +28,12 @@ public class SubScript {
     }
 
     private boolean isBound = false;
-    private int grabOffsetX = 0;
-    private int grabOffsetY = 0;
     private boolean toDispose = false;
 
     private boolean isBoundingBoxOutdated;
 
     public ArrayList<Block> getBlocks() {
         return blocks;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getLayer() {
-        return layer;
-    }
-
-    public void setLayer(int layer) {
-        this.layer = layer;
     }
 
     public SubScript() {
@@ -155,22 +132,6 @@ public class SubScript {
 
     public boolean isBound() {
         return isBound;
-    }
-
-    public int getGrabOffsetY() {
-        return grabOffsetY;
-    }
-
-    public void setGrabOffsetY(int grabOffsetY) {
-        this.grabOffsetY = grabOffsetY;
-    }
-
-    public int getGrabOffsetX() {
-        return grabOffsetX;
-    }
-
-    public void setGrabOffsetX(int grabOffsetX) {
-        this.grabOffsetX = grabOffsetX;
     }
 
     public boolean isToDispose() {

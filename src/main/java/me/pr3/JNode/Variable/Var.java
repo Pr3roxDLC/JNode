@@ -3,7 +3,7 @@ package me.pr3.JNode.Variable;
 public class Var {
 
     private Number number;
-    private String name;
+    private final String name;
 
     public Number getNumber() {
         return number;
@@ -15,10 +15,6 @@ public class Var {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Var(Number number, String name){
