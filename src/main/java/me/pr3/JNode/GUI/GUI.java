@@ -15,13 +15,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUI extends JPanel implements Runnable {
 
     //Internal Variables
-    boolean shouldClose = false;
     public static boolean DEBUG = true;
     //GUI Parent
     public static JFrame frame;
@@ -113,8 +113,7 @@ public class GUI extends JPanel implements Runnable {
     @Override
     public void run() {
         onLoad();
-        while (!shouldClose)
-            onUpdate();
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(this::onUpdate, 0, 16, TimeUnit.MILLISECONDS);
     }
 
 
