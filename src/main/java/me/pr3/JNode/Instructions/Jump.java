@@ -2,6 +2,8 @@ package me.pr3.JNode.Instructions;
 
 import me.pr3.JNode.Interpreter.Program;
 
+import java.util.Locale;
+
 public class Jump extends Instruction {
 
     public int pointer = -1;
@@ -20,6 +22,11 @@ public class Jump extends Instruction {
     @Override
     public void run() {
         parent.setCounter(pointer - 1);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.pointer + "]";
     }
 
 }

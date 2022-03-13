@@ -1,8 +1,6 @@
 package me.pr3.JNode.GUI;
 
-
 import me.pr3.JNode.GUI.Util.EventType;
-import me.pr3.JNode.GUI.blocks.Block;
 import me.pr3.JNode.GUI.blocks.BlockSelector;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
@@ -17,20 +15,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUI extends JPanel implements Runnable {
-    //Internal Varialbles
-    boolean shouldClose = false;
+
+    //Internal Variables
     public static boolean DEBUG = true;
     //GUI Parent
     public static JFrame frame;
     Image dbImage = null;
     Graphics dbg = null;
-    public static int width = 1920;
-    public static int height = 1080;
-
+    public static int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public static int height = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     //FileIO
     public static File loadedFile;
@@ -40,9 +38,9 @@ public class GUI extends JPanel implements Runnable {
 
     public static void initGUI() {
         frame = new JFrame("JNode Editor");
-        frame.setSize(1920, 1080);
+        frame.setSize(width, height);
         frame.setLayout(null);
-        //Inititalize All Components
+        //Initialize All Components
 
         //Initialize the Menu Bar
         frame.setMenuBar(getMenu());
@@ -59,14 +57,12 @@ public class GUI extends JPanel implements Runnable {
             public void mousePressed(MouseEvent mouseEvent) {
                 script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, EventType.PRESSED));
                 BlockSelector.handleMouseEvent(mouseEvent, EventType.PRESSED);
-
             }
 
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
                 script.subScripts.forEach(n -> n.handleMouseEvent(mouseEvent, EventType.RELEASED));
                 BlockSelector.handleMouseEvent(mouseEvent, EventType.RELEASED);
-
             }
 
             @Override
@@ -80,18 +76,12 @@ public class GUI extends JPanel implements Runnable {
             }
         });
 
-        frame.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
-                BlockSelector.handleMouseScrollEvent(mouseWheelEvent);
-            }
-        });
+        frame.addMouseWheelListener(BlockSelector::handleMouseScrollEvent);
 
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        Thread f = new Thread(new GUI());
-        f.start();
+        new Thread(new GUI()).start();
     }
 
     public static MenuBar getMenu() {
@@ -99,26 +89,20 @@ public class GUI extends JPanel implements Runnable {
         Menu fileMenu = new Menu("File");
         MenuItem loadItem = new MenuItem("Load");
 
-        loadItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                //Open File Load Dialog
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-                int result = fileChooser.showOpenDialog(frame);
-                if (result == JFileChooser.APPROVE_OPTION)
-                    loadedFile = fileChooser.getSelectedFile();
-            }
+        loadItem.addActionListener(actionEvent -> {
+            //Open File Load Dialog
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            int result = fileChooser.showOpenDialog(frame);
+            if (result == JFileChooser.APPROVE_OPTION)
+                loadedFile = fileChooser.getSelectedFile();
         });
 
         fileMenu.add(loadItem);
         MenuItem saveItem = new MenuItem("Save");
-        saveItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                //Save File
-                System.out.println("Saving File");
-            }
+        saveItem.addActionListener(actionEvent -> {
+            //TODO doesn't save it yet
+            System.out.println("Saving File");
         });
 
         fileMenu.add(saveItem);
@@ -129,14 +113,7 @@ public class GUI extends JPanel implements Runnable {
     @Override
     public void run() {
         onLoad();
-        while (!shouldClose) {
-            onUpdate();
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(this::onUpdate, 0, 16, TimeUnit.MILLISECONDS);
     }
 
 
@@ -144,12 +121,10 @@ public class GUI extends JPanel implements Runnable {
     public void paint(final Graphics g) {
         //System.out.println("Painted");
         super.paint(g);
-        final Dimension d = getSize();
         if (dbImage == null) {
-            // Double-buffer: clear the offscreen image.
+            //Double-buffer: clear the offscreen image.
             dbImage = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
             dbg = dbImage.getGraphics();
-
         }
         dbg.setColor(Color.LIGHT_GRAY);
         dbg.fillRect(0, 0 , 1920, 1080);

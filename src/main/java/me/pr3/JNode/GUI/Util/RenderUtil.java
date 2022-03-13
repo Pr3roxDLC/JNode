@@ -5,12 +5,13 @@ import java.awt.*;
 public class RenderUtil {
 
     public static Color getInvertedGrayScale(Color color){
-        int i = (color.getRed() + color.getGreen() + color.getBlue())/3;
+        final int i = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
         return new Color(255 - i, 255 - i,255 - i);
     }
 
     public static Color getGrayScale(Color color){
-        int i = (color.getRed() + color.getGreen() + color.getBlue())/3;
-        return new Color(i,i,i);
+        final int i = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
+        return new Color(i, i, i);
     }
+
 }

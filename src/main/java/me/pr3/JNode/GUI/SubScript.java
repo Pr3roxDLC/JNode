@@ -1,5 +1,7 @@
 package me.pr3.JNode.GUI;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.pr3.JNode.GUI.Util.EventType;
 import me.pr3.JNode.GUI.Util.GuiUtil;
 import me.pr3.JNode.GUI.blocks.Block;
@@ -17,7 +19,8 @@ import java.util.Optional;
 public class SubScript {
 
     private final ArrayList<Block> blocks = new ArrayList<>();
-    private int x, y, layer = 0;
+    @Getter @Setter
+    private int x, y, layer = 0, grabOffsetX = 0, grabOffsetY = 0;
     private int width, height = 0;
 
     public void setBound(boolean bound) {
@@ -25,39 +28,12 @@ public class SubScript {
     }
 
     private boolean isBound = false;
-    private int grabOffsetX = 0;
-    private int grabOffsetY = 0;
-    private Rectangle boundingBox = null;
     private boolean toDispose = false;
 
-    private boolean isBoundingBoxOutdated = true;
+    private boolean isBoundingBoxOutdated;
 
     public ArrayList<Block> getBlocks() {
         return blocks;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getLayer() {
-        return layer;
-    }
-
-    public void setLayer(int layer) {
-        this.layer = layer;
     }
 
     public SubScript() {
@@ -70,8 +46,6 @@ public class SubScript {
         //System.out.println(eventType.toString());
         if (eventType == EventType.PRESSED) {
             if (getBoundingBox().contains(event.getPoint())) {
-
-
                 Optional<Map.Entry<Block, Rectangle>> clickedOn = GuiUtil.getBoundingBoxes(this).stream()
                     .filter(n -> n.getValue().contains(event.getPoint()))
                     .findFirst();
@@ -101,14 +75,13 @@ public class SubScript {
                     GuiUtil.deleteBlocksFromScript(blocksBelow, this);
                 });
 
-
                 //System.out.println("Bound to script");
             }
         }
         if (eventType == EventType.RELEASED) {
             if (this.isBound) {
                 isBound = false;
-                if(this.getBlocks().get(0) instanceof HeadBlock)return;
+                if(this.getBlocks().get(0) instanceof HeadBlock) return;
                 for (SubScript script : GUI.script.subScripts) {
                     if (script == this) continue;
                     if (script.getBoundingBox().intersects(this.getBoundingBox())) {
@@ -117,10 +90,9 @@ public class SubScript {
                             if(pair.getKey() instanceof ControlBlock){
                                 GuiUtil.getSubBoundingBoxes(pair.getKey()).entrySet().stream().filter(stringRectangleEntry -> stringRectangleEntry.getValue().contains(intersectPoint)).findFirst().ifPresent(n -> {
                                     String name = n.getKey();
-                                    Rectangle rect = n.getValue();
                                     switch (name){
                                         case"Head":
-                                            GuiUtil.mergeScripts(this, script, pair.getKey(), 0);
+                                            GuiUtil.mergeScripts(this, pair.getKey(), 0);
                                             this.setToDispose(true);
                                             script.isBoundingBoxOutdated = true;
                                             script.getBoundingBox();
@@ -133,7 +105,7 @@ public class SubScript {
                                             break;
                                     }
                                 });
-                            }else if(pair.getValue().contains(intersectPoint)){
+                            } else if(pair.getValue().contains(intersectPoint)){
                                 GuiUtil.mergeScripts(this, script, pair.getKey());
                                 this.setToDispose(true);
                                 script.isBoundingBoxOutdated = true;
@@ -155,28 +127,11 @@ public class SubScript {
             //System.out.println("Calculated " + height + " " + width);
             isBoundingBoxOutdated = false;
         }
-        boundingBox = new Rectangle(x, y, width, height);
-        return boundingBox;
+        return new Rectangle(x, y, width, height);
     }
 
     public boolean isBound() {
         return isBound;
-    }
-
-    public int getGrabOffsetY() {
-        return grabOffsetY;
-    }
-
-    public void setGrabOffsetY(int grabOffsetY) {
-        this.grabOffsetY = grabOffsetY;
-    }
-
-    public int getGrabOffsetX() {
-        return grabOffsetX;
-    }
-
-    public void setGrabOffsetX(int grabOffsetX) {
-        this.grabOffsetX = grabOffsetX;
     }
 
     public boolean isToDispose() {
@@ -186,7 +141,5 @@ public class SubScript {
     public void setToDispose(boolean toDispose) {
         this.toDispose = toDispose;
     }
-
-
 
 }

@@ -1,9 +1,7 @@
 package me.pr3.JNode.GUI.blocks;
 
-import me.pr3.JNode.GUI.GUI;
-import me.pr3.JNode.GUI.SubScript;
-import me.pr3.JNode.GUI.Util.EventType;
-import me.pr3.JNode.GUI.Util.GuiUtil;
+import me.pr3.JNode.GUI.*;
+import me.pr3.JNode.GUI.Util.*;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.ControlBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.IfBlock;
 import me.pr3.JNode.GUI.blocks.ControlBlocks.WhileLoop;
@@ -14,15 +12,13 @@ import me.pr3.JNode.GUI.blocks.HeadBlocks.OnEventBlock;
 import me.pr3.JNode.GUI.blocks.VariableBlocks.SetVarBlock;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.event.*;
+import java.util.*;
 
 public class BlockSelector {
 
     public static Rectangle selectorBoundingBox = new Rectangle(0, 0, 400, GUI.height);
-    public static int scrollAmmount = 0;
+    public static int scrollAmount = 0;
 
     public static ArrayList<Block> blockSelection = new ArrayList<>(Arrays.asList(
         new IfBlock(0, new ArrayList<>()),
@@ -37,7 +33,7 @@ public class BlockSelector {
     public static void draw(Graphics2D g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 400, GUI.height);
-        int x = 50, y = scrollAmmount;
+        int x = 50, y = scrollAmount;
         for (Block block : blockSelection) {
             block.setX(x);
             block.setY(y);
@@ -61,9 +57,7 @@ public class BlockSelector {
             }
             if (GUI.DEBUG) {
                 g.setColor(Color.RED);
-                GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> {
-                    g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-                });
+                GuiUtil.getSubBoundingBoxes(block).forEach((s, rectangle) -> g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
             }
             y += 200;
         }
@@ -75,18 +69,22 @@ public class BlockSelector {
             if (selectorBoundingBox.contains(mouseEvent.getPoint())) {
                 blockSelection.stream().filter(n -> n.getBoundingBox().contains(mouseEvent.getPoint())).findFirst().ifPresent(block -> {
                     SubScript newScript = new SubScript();
-                    newScript.getBlocks().add(GuiUtil.getNewBlockByType(block.getClass()));
+                    try {
+                        if (block.getClass().getConstructors()[0].getGenericParameterTypes().length > 1)
+                            newScript.getBlocks().add((Block) block.getClass().getConstructors()[0].newInstance(0, new ArrayList<>()));
+                        else newScript.getBlocks().add((Block) block.getClass().getConstructors()[0].newInstance(0));
+                    } catch (Exception ignored) {
+                        //Ignored because it won't occur lol
+                    }
                     newScript.setBound(true);
                     GUI.script.subScripts.add(newScript);
                 });
             }
-        } else if (eventType == EventType.RELEASED) {
-
         }
     }
 
     public static void handleMouseScrollEvent(MouseWheelEvent mouseWheelEvent){
-       scrollAmmount += mouseWheelEvent.getUnitsToScroll();
+       scrollAmount += mouseWheelEvent.getUnitsToScroll() * 7.5;
     }
 
 }

@@ -2,6 +2,8 @@ package me.pr3.JNode.Instructions;
 
 import me.pr3.JNode.Interpreter.Program;
 
+import java.util.Locale;
+
 public class CallSubroutine extends Instruction {
 
     public int subroutineAddress = -1;
@@ -20,6 +22,11 @@ public class CallSubroutine extends Instruction {
     public void run() {
         parent.getReturnStack().push(parent.getCounter());
         parent.setCounter(subroutineAddress - 1);
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName().toUpperCase(Locale.ROOT) + "[" + this.subroutineAddress + "]";
     }
 
 }
